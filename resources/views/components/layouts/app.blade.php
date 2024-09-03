@@ -20,8 +20,9 @@
 
     <!-- Styles -->
     @vite('resources/css/app.css')
-    <script src="{{ asset('resources/js/app.js') }}"></script>
-    <script src="{{ asset('resources/js/tsparticle.min.js') }}"></script>
+  
+
+   
     @livewireStyles
 
 
@@ -62,8 +63,9 @@
         <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
     </div>
 
-    <!-- Particles Container -->
-    <div id="particles-js" class="absolute inset-0"></div>
+     <!-- Particles Container -->
+     <div id="particles-js" class="absolute inset-0 z-10"></div>
+
 
     <!-- Logo Section in Top Left Corner -->
     <div class="absolute top-4 left-4 flex items-center space-x-2">
@@ -85,7 +87,7 @@
     <div class="w-2/3 bg-black text-white flex flex-col">
         <header class="bg-gray-800 bg-opacity-80">
             <nav class="container mx-auto px-4 py-2 flex justify-end">
-                <ul class="flex space-x-4">
+                <ul class="flex font-roboto-condensed uppercase space-x-4">
                     <li><a href="/" class="hover:text-gray-300">Acasa</a></li>
                     <li><a href="/despre" class="hover:text-gray-300">Despre</a></li>
                     <li><a href="#" class="hover:text-gray-300">Skill-uri</a></li>
@@ -104,6 +106,10 @@
     </div>
 
     @livewireScripts
+      @vite('resources/js/app.js')
+   
+
+
 </body>
 
 </html>
