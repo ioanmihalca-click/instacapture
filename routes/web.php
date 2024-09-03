@@ -1,7 +1,8 @@
 <?php
 
+use App\Livewire\Acasa;
+use App\Livewire\Despre;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', Acasa::class);
+Route::get('/despre', Despre::class);

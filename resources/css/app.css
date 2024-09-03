@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles.css */
+nav ul li a {
+    position: relative;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    color: #e5e7eb; /* Tailwind gray-300 color */
+  }
+  
+  nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: #d1d5db; /* Tailwind gray-400 color */
+    transition: width 0.3s ease;
+  }
+  
+  nav ul li a:hover::after {
+    width: 100%;
+  }
+  
