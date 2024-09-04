@@ -2,6 +2,8 @@ import './bootstrap';
 import { tsParticles } from "tsparticles-engine";
 import { loadLinksPreset } from "tsparticles-preset-links";
 
+
+
 const initParticles = async () => {
     await loadLinksPreset(tsParticles);
     

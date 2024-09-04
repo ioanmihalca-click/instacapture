@@ -4,11 +4,11 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\PortfolioItem;
-use App\Services\CloudinaryService;
 
 class Portofoliu extends Component
 {
-    public $portfolioItems;
+    public $portfolioItems = [];
+    public $selectedCategory = null;
 
     public function mount()
     {
@@ -17,7 +17,31 @@ class Portofoliu extends Component
 
     public function loadPortfolioItems()
     {
-        $this->portfolioItems = PortfolioItem::orderBy('created_at', 'desc')->get();
+        $query = PortfolioItem::query();
+        
+        if ($this->selectedCategory) {
+            $query->where('category', $this->selectedCategory);
+        }
+
+        $items = $query->get();
+
+        // Group items manually
+        $this->portfolioItems = [];
+        foreach ($items as $item) {
+            $this->portfolioItems[$item->category][] = [
+                'id' => $item->id,
+                'image_public_id' => $item->image_public_id,
+                // Add other fields as needed
+            ];
+        }
+
+        $this->dispatch('photos-loaded');
+    }
+
+    public function selectCategory($category)
+    {
+        $this->selectedCategory = $category;
+        $this->loadPortfolioItems();
     }
 
     public function render()

@@ -9,5 +9,11 @@ class PortfolioItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'image_public_id'];
+    protected $fillable = ['category', 'image_public_id'];
+
+    public const CATEGORIES = [
+        'evenimente' => 'Evenimente',
+        'natura' => 'Natura',
+        'nunti_botezuri' => 'Nunți & Botezuri',
+    ];
 }
