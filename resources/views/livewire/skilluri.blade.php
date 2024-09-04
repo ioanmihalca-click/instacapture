@@ -19,7 +19,7 @@
      "
      x-intersect="isIntersecting = true">
 
-    <h1 class="mb-6 text-2xl font-bold uppercase md:mt-12 md:text-4xl font-roboto-condensed md:mb-8"
+    <h1 class="mb-6 text-2xl font-bold text-center uppercase md:mt-12 md:text-4xl font-roboto-condensed md:mb-8"
         x-intersect="$el.classList.add('animate-fade-in-up')">
         Competențe și Abilități
     </h1>
