@@ -1,4 +1,4 @@
-<div class="p-8 mt-24">
+<div class="mt-24 md:p-8">
     <h2 class="mb-8 text-3xl font-bold text-center md:text-4xl lg:text-5xl">Portofoliu</h2>
     
     <div class="mb-8">
@@ -29,7 +29,7 @@
                 <h3 class="mb-6 text-2xl font-semibold text-yellow-400 md:text-3xl">
                     {{ App\Models\PortfolioItem::CATEGORIES[$category] ?? $category }}
                 </h3>
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pswp-gallery" 
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" 
                      id="gallery-{{ $category }}" 
                      wire:ignore>
                     @foreach($items as $item)
@@ -59,17 +59,3 @@
     @endif
 </div>
 
-{{-- @push('styles')
-    @vite('resources/css/photoswipe.css')
-@endpush
-
-@push('scripts')
-    @vite('resources/js/photoswipe.js')
-    <script>
-        document.addEventListener('livewire:load', function () {
-            Livewire.hook('message.processed', (message, component) => {
-                initPhotoSwipe();
-            });
-        });
-    </script>
-@endpush --}}
