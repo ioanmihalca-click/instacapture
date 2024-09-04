@@ -1,6 +1,7 @@
 <div
     x-data="photoswipe()"
     x-init="init()"
+    @photos-loaded.window="initPhotoSwipe()"
 >
     <h2 class="mb-8 text-3xl font-bold text-center md:text-4xl lg:text-5xl">Portofoliu</h2>
     
@@ -29,15 +30,11 @@
                 <h3 class="mb-6 text-2xl font-semibold text-yellow-400 md:text-3xl">
                     {{ App\Models\PortfolioItem::CATEGORIES[$category] ?? $category }}
                 </h3>
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pswp-gallery" 
-                     id="gallery-{{ $category }}" 
-                     wire:ignore
-                     x-init="$nextTick(() => initPhotoSwipe())">
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pswp-gallery" id="gallery-{{ $category }}" wire:ignore>
                     @foreach($items as $item)
                         <a href="{{ app(App\Services\CloudinaryService::class)->getImageUrl($item['image_public_id']) }}"
                            data-pswp-width="1024"
                            data-pswp-height="768"
-                           target="_blank"
                            class="overflow-hidden transition-transform duration-300 rounded-lg shadow-lg portfolio-item hover:scale-105">
                             <img src="{{ app(App\Services\CloudinaryService::class)->getImageUrl($item['image_public_id'], ['width' => 400, 'height' => 300, 'crop' => 'fill']) }}"
                                  alt="Portfolio image from {{ App\Models\PortfolioItem::CATEGORIES[$category] ?? $category }} category"
