@@ -39,6 +39,7 @@
         isMenuOpen: false,
         isTransitioning: false,
         currentUrl: '{{ url()->current() }}',
+        isPortfolioPage: {{ request()->routeIs('portofoliu') ? 'true' : 'false' }}
     }" x-on:livewire:navigating.window="isTransitioning = true"
         x-on:livewire:navigated.window="
           setTimeout(() => {
@@ -46,9 +47,9 @@
           }, 300);
           if ($event.detail && $event.detail.url) {
               currentUrl = $event.detail.url;
+              isPortfolioPage = currentUrl.includes('portofoliu');
           }
       ">
-
         <!-- Loading Indicator -->
         <div x-show="isTransitioning"
             class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -56,16 +57,16 @@
         </div>
 
         <!-- Left side with photo background and particles -->
-        <div class="relative z-0 w-1/3 md:w-1/2">
-            <div class="absolute inset-0 bg-center bg-cover" style="background-image: url('/assets/photo-bg.jpg');">
+    <div class="relative z-0 w-1/3 md:w-1/2" :class="{ 'hidden': isPortfolioPage }">
+        <div class="absolute inset-0 bg-center bg-cover" style="background-image: url('/assets/photo-bg.jpg');"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
+    </div>
 
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
-        </div>
-        <!-- Navigation -->
+    <!-- Navigation -->
+ 
 
         <!-- Overlay navigation -->
-        <div class="absolute top-0 left-0 right-0 z-30 p-4">
+       <div class="absolute top-0 left-0 right-0 z-30 p-4" :class="{ 'w-full': isPortfolioPage }">
             <div class="container flex items-center justify-between mx-auto">
 
                 <!-- Logo Section -->
@@ -226,17 +227,20 @@
         </div>
 
 
-        <!-- Right side with black background and content -->
-        <div class="relative z-20 flex flex-col w-2/3 mt-12 text-white bg-black bg-opacity-50 md:mt-2 md:w-1/2">
-            <main class="flex-1 p-4 text-left">
-                {{ $slot }}
-            </main>
-        </div>
-
-
-
-       
+       <!-- Right side with black background and content -->
+    <div class="relative z-20 flex flex-col text-white bg-black bg-opacity-50"
+         :class="{
+             'w-2/3 md:w-1/2 mt-12 md:mt-2': !isPortfolioPage,
+             'w-full h-full mt-0': isPortfolioPage
+         }">
+        <main class="flex-1 p-4 text-left" :class="{ 'p-0': isPortfolioPage }">
+            {{ $slot }}
+        </main>
     </div>
+
+    </div>
+
+    
 
     {{-- <footer class="text-sm text-center text-gray-400 bg-gray-900">
 
@@ -250,7 +254,6 @@
 
 
     </footer> --}}
-     @livewireScripts
+    @livewireScripts
 </body>
-
 </html>
