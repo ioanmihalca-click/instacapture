@@ -19,16 +19,19 @@ class PortfolioItemResource extends Resource
 {
     protected static ?string $model = PortfolioItem::class;
 
+    protected static ?string $navigationLabel = 'Portofoliu Items';
+
     protected static ?string $navigationIcon = 'heroicon-o-camera';
 
     public static function form(Form $form): Form
     {
         return $form
         ->schema([
-            Forms\Components\Select::make('category')
-                ->options(PortfolioItem::CATEGORIES)
+            Forms\Components\Select::make('category_id')
+                ->label('Category')
+                ->options(\App\Models\Category::all()->pluck('name', 'id'))
                 ->required(),
-            FileUpload::make('image')
+            Forms\Components\FileUpload::make('image')
                 ->image()
                 ->maxSize(10024)
                 ->directory('portfolio')
@@ -46,7 +49,7 @@ class PortfolioItemResource extends Resource
     {
         return $table
         ->columns([
-            Tables\Columns\TextColumn::make('category'),
+            Tables\Columns\TextColumn::make('category.name')->label('Category'),
             Tables\Columns\ImageColumn::make('image')
                 ->getStateUsing(function (PortfolioItem $record) {
                     $cloudinaryService = app(CloudinaryService::class);
@@ -70,6 +73,11 @@ class PortfolioItemResource extends Resource
         return [
             //
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 
     public static function getPages(): array

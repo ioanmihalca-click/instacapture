@@ -8,11 +8,11 @@
                     class="w-full px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full sm:w-auto md:text-base {{ is_null($selectedCategory) ? 'bg-yellow-400 text-black' : 'bg-gray-700 text-white hover:bg-gray-600' }}">
                 Toate
             </button>
-            @foreach(App\Models\PortfolioItem::CATEGORIES as $value => $label)
-                <button wire:click="selectCategory('{{ $value }}')"
-                        aria-label="Show {{ $label }} category"
-                        class="w-full px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full sm:w-auto md:text-base {{ $selectedCategory === $value ? 'bg-yellow-400 text-black' : 'bg-gray-700 text-white hover:bg-gray-600' }}">
-                    {{ $label }}
+            @foreach($categories as $category)
+                <button wire:click="selectCategory('{{ $category->id }}')"
+                        aria-label="Show {{ $category->name }} category"
+                        class="w-full px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full sm:w-auto md:text-base {{ $selectedCategory == $category->id ? 'bg-yellow-400 text-black' : 'bg-gray-700 text-white hover:bg-gray-600' }}">
+                    {{ $category->name }}
                 </button>
             @endforeach
         </div>
@@ -24,28 +24,28 @@
     </div>
 
     @if(!empty($portfolioItems))
-        @foreach($portfolioItems as $category => $items)
+        @foreach($portfolioItems as $categoryName => $items)
             <div class="mb-12">
                 <h3 class="mb-6 text-2xl font-semibold text-yellow-400 md:text-3xl">
-                    {{ App\Models\PortfolioItem::CATEGORIES[$category] ?? $category }}
+                    {{ $categoryName }}
                 </h3>
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" 
-                     id="gallery-{{ $category }}" 
-                     wire:ignore>
-                    @foreach($items as $item)
-                        <a href="{{ app(App\Services\CloudinaryService::class)->getImageUrl($item['image_public_id']) }}"
-                           data-pswp-width="1024"
-                           data-pswp-height="768"
-                           target="_blank"
-                           class="overflow-hidden transition-transform duration-300 rounded-lg shadow-lg portfolio-item hover:scale-105">
-                            <img src="{{ app(App\Services\CloudinaryService::class)->getImageUrl($item['image_public_id'], ['width' => 400, 'height' => 300, 'crop' => 'fill']) }}"
-                                 alt="Portfolio image from {{ App\Models\PortfolioItem::CATEGORIES[$category] ?? $category }} category"
-                                 class="object-cover w-full h-64 transition-transform duration-300 hover:scale-110"
-                                 loading="lazy"
-                                 onerror="this.onerror=null;this.src='/path/to/fallback-image.jpg';">
-                        </a>
-                    @endforeach
-                </div>
+
+<div id="gallery--dynamic-zoom-level" class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">    
+   
+    @foreach($items as $item)
+        <a href="{{ app(App\Services\CloudinaryService::class)->getImageUrl($item->image_public_id) }}"
+   data-pswp-width="1024"
+   data-pswp-height="768"
+   data-pswp-src="{{ app(App\Services\CloudinaryService::class)->getImageUrl($item->image_public_id) }}"
+   class="overflow-hidden transition-transform duration-300 rounded-lg shadow-lg portfolio-item hover:scale-105">
+            <img src="{{ app(App\Services\CloudinaryService::class)->getImageUrl($item->image_public_id, ['width' => 400, 'height' => 300, 'crop' => 'fill']) }}"
+                 alt="Portfolio image from {{ $categoryName }} category"
+                 class="object-cover w-full h-64 transition-transform duration-300 hover:scale-110"
+                 loading="lazy"
+                 onerror="this.onerror=null;this.src='/path/to/fallback-image.jpg';">
+        </a>
+    @endforeach
+</div>
             </div>
         @endforeach
     @else
@@ -57,5 +57,15 @@
             {{ $paginator->links() }}
         </div>
     @endif
-</div>
 
+
+
+@push('styles')
+        @vite(['resources/css/app.css'])
+    @endpush
+
+    @push('scripts')
+        @vite(['resources/js/app.js'])
+    @endpush
+
+</div>

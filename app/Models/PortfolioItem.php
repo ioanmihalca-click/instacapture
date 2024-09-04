@@ -2,40 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PortfolioItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category', 'image_public_id'];
+    protected $fillable = ['category_id', 'image_public_id'];
 
-    public const CATEGORIES = [
-        'evenimente' => 'Evenimente',
-        'natura' => 'Natura',
-        'nunti_botezuri' => 'Nunți & Botezuri',
-    ];
-
-    /**
-     * Get the category label.
-     *
-     * @return string
-     */
-    public function getCategoryLabelAttribute()
+    public function category()
     {
-        return self::CATEGORIES[$this->category] ?? $this->category;
+        return $this->belongsTo(Category::class);
     }
 
-    /**
-     * Scope a query to only include items of a given category.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $category
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
+    public function getCategoryLabelAttribute()
+    {
+        return $this->category->name;
+    }
+
     public function scopeOfCategory($query, $category)
     {
-        return $query->where('category', $category);
+        return $query->whereHas('category', function ($query) use ($category) {
+            $query->where('slug', $category);
+        });
     }
 }

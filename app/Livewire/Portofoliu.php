@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\PortfolioItem;
+use App\Models\Category;
 use Livewire\WithPagination;
 
 class Portofoliu extends Component
@@ -30,42 +31,48 @@ class Portofoliu extends Component
         $this->resetPage();
     }
 
-    public function selectCategory($category)
+    public function selectCategory($categoryId)
     {
-        $this->selectedCategory = $category;
+        $this->selectedCategory = $categoryId;
         $this->resetPage();
     }
 
     public function getPortfolioItemsProperty()
-    {
-        $query = PortfolioItem::query();
-        
-        if ($this->selectedCategory) {
-            $query->where('category', $this->selectedCategory);
-        }
-
-        if ($this->search) {
-            $query->where('category', 'like', '%' . $this->search . '%');
-        }
-
-        $items = $query->paginate($this->perPage);
-
-        // Group items
-        $groupedItems = [];
-        foreach ($items as $item) {
-            $groupedItems[$item->category][] = $item;
-        }
-
-        return $groupedItems;
+{
+    $query = PortfolioItem::with('category');
+    
+    if ($this->selectedCategory) {
+        $query->where('category_id', $this->selectedCategory);
     }
 
+    if ($this->search) {
+        $query->whereHas('category', function ($q) {
+            $q->where('name', 'like', '%' . $this->search . '%');
+        });
+    }
+
+    $items = $query->paginate($this->perPage);
+
+    // Group items
+    $groupedItems = [];
+    foreach ($items as $item) {
+        $groupedItems[$item->category->name][] = $item;
+    }
+
+    return $groupedItems;
+}
     public function render()
     {
+        $categories = Category::all();
+        
         return view('livewire.portofoliu', [
             'portfolioItems' => $this->portfolioItems,
-            'paginator' => PortfolioItem::query()
-                ->when($this->selectedCategory, fn($query) => $query->where('category', $this->selectedCategory))
-                ->when($this->search, fn($query) => $query->where('category', 'like', '%' . $this->search . '%'))
+            'categories' => $categories,
+            'paginator' => PortfolioItem::with('category')
+                ->when($this->selectedCategory, fn($query) => $query->where('category_id', $this->selectedCategory))
+                ->when($this->search, fn($query) => $query->whereHas('category', function($q) {
+                    $q->where('name', 'like', '%' . $this->search . '%');
+                }))
                 ->paginate($this->perPage)
         ]);
     }

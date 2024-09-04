@@ -2,6 +2,46 @@ import './bootstrap';
 import { tsParticles } from "tsparticles-engine";
 import { loadLinksPreset } from "tsparticles-preset-links";
 
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
+
+function isPhonePortrait() {
+  return window.matchMedia('(max-width: 600px) and (orientation: portrait)').matches;
+}
+
+function initPhotoSwipe() {
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#gallery--dynamic-zoom-level',
+    children: 'a',
+    initialZoomLevel: (zoomLevelObject) => {
+      if (isPhonePortrait()) {
+        return zoomLevelObject.vFill;
+      } else {
+        return zoomLevelObject.fit;
+      }
+    },
+    secondaryZoomLevel: (zoomLevelObject) => {
+      if (isPhonePortrait()) {
+        return zoomLevelObject.fit;
+      } else {
+        return 1;
+      }
+    },
+    maxZoomLevel: 1,
+    pswpModule: () => import('photoswipe')
+  });
+  lightbox.init();
+}
+
+// Inițializează PhotoSwipe după încărcarea DOM-ului
+document.addEventListener('DOMContentLoaded', initPhotoSwipe);
+
+// Reinițializează PhotoSwipe după actualizările Livewire
+document.addEventListener('livewire:load', () => {
+  Livewire.hook('message.processed', (message, component) => {
+    initPhotoSwipe();
+  });
+});
 
 
 const initParticles = async () => {
