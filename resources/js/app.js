@@ -2,6 +2,20 @@ import './bootstrap';
 import { tsParticles } from "tsparticles-engine";
 import { loadLinksPreset } from "tsparticles-preset-links";
 
+import 'lightbox2/dist/js/lightbox-plus-jquery';
+
+
+
+document.addEventListener('livewire:load', function () {
+    Livewire.hook('message.processed', (message, component) => {
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true
+        });
+    });
+});
+
+
 
 
 const initParticles = async () => {

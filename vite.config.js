@@ -15,7 +15,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            'photoswipe': 'photoswipe/dist/photoswipe.esm.js',
+            'photoswipe': 'node_modules/photoswipe/dist/photoswipe.esm.js',
         },
     },
 });

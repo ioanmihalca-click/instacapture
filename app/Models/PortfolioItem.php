@@ -16,4 +16,26 @@ class PortfolioItem extends Model
         'natura' => 'Natura',
         'nunti_botezuri' => 'Nunți & Botezuri',
     ];
+
+    /**
+     * Get the category label.
+     *
+     * @return string
+     */
+    public function getCategoryLabelAttribute()
+    {
+        return self::CATEGORIES[$this->category] ?? $this->category;
+    }
+
+    /**
+     * Scope a query to only include items of a given category.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $category
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCategory($query, $category)
+    {
+        return $query->where('category', $category);
+    }
 }

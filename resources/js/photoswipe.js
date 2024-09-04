@@ -1,32 +1,26 @@
-import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.js';
-import PhotoSwipe from 'photoswipe/dist/photoswipe.esm.js';
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import PhotoSwipe from 'photoswipe';
 
-window.photoswipe = function() {
-    return {
-        lightboxInstances: {},
-        init() {
-            this.initPhotoSwipe();
-            this.setupLivewireListeners();
-        },
-        initPhotoSwipe() {
-            const galleries = document.querySelectorAll('.pswp-gallery');
-            galleries.forEach((gallery, index) => {
-                if (this.lightboxInstances[gallery.id]) {
-                    this.lightboxInstances[gallery.id].destroy();
-                }
-                const lightbox = new PhotoSwipeLightbox({
-                    gallery: `#${gallery.id}`,
-                    children: 'a',
-                    pswpModule: PhotoSwipe
-                });
-                lightbox.init();
-                this.lightboxInstances[gallery.id] = lightbox;
-            });
-        },
-        setupLivewireListeners() {
-            Livewire.hook('message.processed', (message, component) => {
-                this.initPhotoSwipe();
-            });
+let lightboxInstances = {};
+
+window.initPhotoSwipe = function() {
+    const galleries = document.querySelectorAll('.pswp-gallery');
+    galleries.forEach((gallery) => {
+        if (lightboxInstances[gallery.id]) {
+            lightboxInstances[gallery.id].destroy();
+            delete lightboxInstances[gallery.id];
         }
-    };
+        
+        const lightbox = new PhotoSwipeLightbox({
+            gallery: `#${gallery.id}`,
+            children: 'a',
+            pswpModule: PhotoSwipe
+        });
+        
+        lightbox.init();
+        lightboxInstances[gallery.id] = lightbox;
+    });
 };
+
+// Initialize PhotoSwipe on page load
+document.addEventListener('DOMContentLoaded', initPhotoSwipe);

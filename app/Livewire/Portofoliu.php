@@ -4,18 +4,39 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\PortfolioItem;
+use Livewire\WithPagination;
 
 class Portofoliu extends Component
 {
-    public $portfolioItems = [];
-    public $selectedCategory = null;
+    use WithPagination;
 
-    public function mount()
+    public $selectedCategory = null;
+    public $search = '';
+    public $perPage = 12;
+
+    protected $queryString = [
+        'selectedCategory' => ['except' => ''],
+        'search' => ['except' => ''],
+        'perPage' => ['except' => 12],
+    ];
+
+    public function updatingSearch()
     {
-        $this->loadPortfolioItems();
+        $this->resetPage();
     }
 
-    public function loadPortfolioItems()
+    public function updatingSelectedCategory()
+    {
+        $this->resetPage();
+    }
+
+    public function selectCategory($category)
+    {
+        $this->selectedCategory = $category;
+        $this->resetPage();
+    }
+
+    public function getPortfolioItemsProperty()
     {
         $query = PortfolioItem::query();
         
@@ -23,29 +44,29 @@ class Portofoliu extends Component
             $query->where('category', $this->selectedCategory);
         }
 
-        $items = $query->get();
-
-        // Group items manually
-        $this->portfolioItems = [];
-        foreach ($items as $item) {
-            $this->portfolioItems[$item->category][] = [
-                'id' => $item->id,
-                'image_public_id' => $item->image_public_id,
-                // Add other fields as needed
-            ];
+        if ($this->search) {
+            $query->where('category', 'like', '%' . $this->search . '%');
         }
 
-        $this->dispatch('photos-loaded');
-    }
+        $items = $query->paginate($this->perPage);
 
-    public function selectCategory($category)
-    {
-        $this->selectedCategory = $category;
-        $this->loadPortfolioItems();
+        // Group items
+        $groupedItems = [];
+        foreach ($items as $item) {
+            $groupedItems[$item->category][] = $item;
+        }
+
+        return $groupedItems;
     }
 
     public function render()
     {
-        return view('livewire.portofoliu');
+        return view('livewire.portofoliu', [
+            'portfolioItems' => $this->portfolioItems,
+            'paginator' => PortfolioItem::query()
+                ->when($this->selectedCategory, fn($query) => $query->where('category', $this->selectedCategory))
+                ->when($this->search, fn($query) => $query->where('category', 'like', '%' . $this->search . '%'))
+                ->paginate($this->perPage)
+        ]);
     }
 }
