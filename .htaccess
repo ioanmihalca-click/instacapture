@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+  
+RewriteEngine On
+
+  # Redirect from http:// and https://www to https://clickstudios-digital.com (non-www)
+  # RewriteCond %{HTTP_HOST} ^(www\.)?clickstudiosdigital\.com [NC,OR]
+  # RewriteCond %{HTTP_HOST} ^clickstudiosdigital\.com [NC]
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^(.*)$ https://clickstudios-digital.com/$1 [L,R=301]
+
+  # RewriteCond %{HTTP_HOST} ^www\.clickstudios-digital\.com [NC]
+  # RewriteRule ^(.*)$ https://clickstudios-digital.com/$1 [L,R=301]
+
+    # Internal rewrite to public directory
+    RewriteRule ^$ public/ [L]
+    RewriteRule (.*) public/$1 [L]
+</IfModule>

@@ -39,7 +39,8 @@ class Portofoliu extends Component
 
     public function getPortfolioItemsProperty()
 {
-    $query = PortfolioItem::with('category');
+    $query = PortfolioItem::with('category')
+        ->orderBy('created_at', 'desc'); // Ordonează elementele după data creării, cele mai noi primele
     
     if ($this->selectedCategory) {
         $query->where('category_id', $this->selectedCategory);
@@ -51,13 +52,14 @@ class Portofoliu extends Component
         });
     }
 
-    $items = $query->paginate($this->perPage);
+    $items = $query->get();
 
-    // Group items
-    $groupedItems = [];
-    foreach ($items as $item) {
-        $groupedItems[$item->category->name][] = $item;
-    }
+    // Grupează elementele după categorie și sortează categoriile după cea mai recentă postare
+    $groupedItems = $items->groupBy('category.name')->map(function ($categoryItems) {
+        return $categoryItems->sortByDesc('created_at');
+    })->sortByDesc(function ($categoryItems) {
+        return $categoryItems->first()->created_at;
+    });
 
     return $groupedItems;
 }
