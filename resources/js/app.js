@@ -17,14 +17,15 @@ async function loadPhotoSwipe() {
 }
 
 function initPhotoSwipe(PhotoSwipeLightbox, PhotoSwipe) {
+    if (lightbox) {
+        lightbox.destroy();
+        lightbox = null;
+    }
+
     lightbox = new PhotoSwipeLightbox({
-        
         gallery: "#gallery--dynamic-zoom-level",
         children: "a",
         pswpModule: PhotoSwipe,
-        arrowKeys: true,
-        arrowPrev: true,
-        arrowNext: true,
         showHideAnimationType: "zoom",
         showAnimationDuration: 500,
         hideAnimationDuration: 500,
@@ -45,6 +46,9 @@ function initPhotoSwipe(PhotoSwipeLightbox, PhotoSwipe) {
   },
 
   maxZoomLevel: 1,
+  arrowKeys: true,
+  arrowPrev: true,
+  arrowNext: true,
     });
 
     lightbox.on('beforeOpen', async () => {

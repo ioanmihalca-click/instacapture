@@ -81,12 +81,4 @@
             </button>
         </div>
     @endif
-
-    @push('styles')
-        @vite(['resources/css/app.css'])
-    @endpush
-
-    @push('scripts')
-        @vite(['resources/js/app.js'])
-    @endpush
 </div>
