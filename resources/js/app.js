@@ -140,17 +140,30 @@ const initParticles = async () => {
     });
 };
 
-// Function to check and initialize PhotoSwipe
-function checkAndInitPhotoSwipe() {
-    if (window.location.pathname.includes('portofoliu') && document.querySelector("#gallery--dynamic-zoom-level")) {
-        loadPhotoSwipe();
+
+// Function to check and initialize PhotoSwipe with retry mechanism
+function checkAndInitPhotoSwipe(retries = 5) {
+    console.log(`Checking for PhotoSwipe initialization. Retries left: ${retries}`);
+    if (window.location.pathname.includes('portofoliu')) {
+        if (document.querySelector("#gallery--dynamic-zoom-level")) {
+            console.log('Gallery found. Initializing PhotoSwipe.');
+            loadPhotoSwipe();
+        } else if (retries > 0) {
+            console.log('Gallery not found. Retrying...');
+            setTimeout(() => checkAndInitPhotoSwipe(retries - 1), 200);
+        } else {
+            console.log('Gallery not found after all retries. PhotoSwipe initialization failed.');
+        }
+    } else {
+        console.log('Not on portfolio page. Skipping PhotoSwipe initialization.');
     }
 }
 
-// Initialize particles and PhotoSwipe on navigation
+// Initialize everything on Livewire navigation
 document.addEventListener('livewire:navigated', () => { 
+    console.log('livewire:navigated event fired');
     initParticles();
-    setTimeout(checkAndInitPhotoSwipe, 100); // Small delay to ensure DOM is ready
+    checkAndInitPhotoSwipe();
 });
 
 // Lazy load PhotoSwipe when needed
@@ -162,14 +175,27 @@ document.addEventListener("click", (event) => {
 
 // Handle Livewire updates
 document.addEventListener("livewire:load", () => {
-    Livewire.on('itemsLoaded', checkAndInitPhotoSwipe);
-    Livewire.on('portfolioLoaded', checkAndInitPhotoSwipe);
+    Livewire.on('itemsLoaded', () => {
+        console.log('itemsLoaded event fired');
+        checkAndInitPhotoSwipe();
+    });
+    Livewire.on('portfolioLoaded', () => {
+        console.log('portfolioLoaded event fired');
+        checkAndInitPhotoSwipe();
+    });
 });
 
 // Handle Livewire page updates
 Livewire.hook("message.processed", (message, component) => {
-    setTimeout(checkAndInitPhotoSwipe, 100); // Small delay to ensure DOM is updated
+    console.log('Livewire message processed');
+    checkAndInitPhotoSwipe();
 });
 
 // Expose loadPhotoSwipe to window for manual triggering if needed
 window.loadPhotoSwipe = loadPhotoSwipe;
+
+// Optional: Add a manual trigger for debugging
+window.manuallyInitPhotoSwipe = () => {
+    console.log('Manually triggering PhotoSwipe initialization');
+    checkAndInitPhotoSwipe();
+};
