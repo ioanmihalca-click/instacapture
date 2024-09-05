@@ -16,7 +16,7 @@
          x-transition:enter-end="opacity-100">
         
         <p class="text-lg leading-relaxed text-gray-300">
-            De peste 8 ani ofer amintiri unice și sesiuni de fotografie memorabile, fie că este vorba despre evenimente în familie sau evenimente corporate.
+            De peste 10 ani ofer amintiri unice și sesiuni de fotografie memorabile, fie că este vorba despre evenimente în familie sau evenimente corporate.
         </p>
 
         <p class="text-lg leading-relaxed text-gray-300">

@@ -4,8 +4,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="description" content="InstaCapture | Fotografie Profesionala, Cluj sau oriunde in Romania" />
+<meta name="keywords" content="InstaCapture, Fotografie Profesionala, Editare Foto, Fotograf Evenimente, Fotograf publicitate, Cluj, Romania" />    
 
     <title>{{ $title ?? 'InstaCapture' }}</title>
+
+     <!-- Facebook Open Graph meta tags -->
+    <meta property="og:title" content="{{ $title ?? 'InstaCapture' }}">
+    <meta property="og:description" content="InstaCapture | Fotografie profesionala">
+    <meta property="og:image" content="{{ asset('assets/DE-PUS-Poza.jpg') }}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="InstaCapture | Fotografie Profesionala, Cluj sau oriunde in Romania" />
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:site_name" content="InstaCapture" />
+
+     <!-- Local Business Schema Markup -->
+  
 
     <!-- Favicon -->
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
@@ -241,20 +257,7 @@
 
     </div>
 
-    
 
-    {{-- <footer class="text-sm text-center text-gray-400 bg-gray-900">
-
-        <p>&copy; <?php echo date('Y'); ?> InstaCapture. Toate drepturile rezervate.</p>
-
-        Aplicație web dezvoltată de
-        <a href="https://clickstudios-digital.com" target="_blank" rel="noopener noreferrer"
-            class="text-yellow-400 transition-colors duration-300 hover:text-yellow-300">
-            Click Studios Digital
-        </a>
-
-
-    </footer> --}}
 
         <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="pswp__bg"></div>
@@ -291,6 +294,10 @@
     </div>
 </div>
 
+ <!-- Livewire Footer Component -->
+    {{-- <livewire:footer /> --}}
+    
+    
     @livewireScripts
 
 
