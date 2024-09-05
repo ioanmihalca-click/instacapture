@@ -140,8 +140,18 @@ const initParticles = async () => {
     });
 };
 
-// Initialize particles on first load
-document.addEventListener("DOMContentLoaded", initParticles);
+// Function to check and initialize PhotoSwipe
+function checkAndInitPhotoSwipe() {
+    if (window.location.pathname.includes('portofoliu') && document.querySelector("#gallery--dynamic-zoom-level")) {
+        loadPhotoSwipe();
+    }
+}
+
+// Initialize particles and PhotoSwipe on navigation
+document.addEventListener('livewire:navigated', () => { 
+    initParticles();
+    setTimeout(checkAndInitPhotoSwipe, 100); // Small delay to ensure DOM is ready
+});
 
 // Lazy load PhotoSwipe when needed
 document.addEventListener("click", (event) => {
@@ -150,26 +160,15 @@ document.addEventListener("click", (event) => {
     }
 });
 
-// Handle Livewire page updates
+// Handle Livewire updates
 document.addEventListener("livewire:load", () => {
-    Livewire.hook("message.processed", (message, component) => {
-        if (document.querySelector("#gallery--dynamic-zoom-level")) {
-            loadPhotoSwipe();
-        }
-    });
-
-    // Add this new event listener
-    Livewire.on('itemsLoaded', () => {
-        loadPhotoSwipe();
-    });
+    Livewire.on('itemsLoaded', checkAndInitPhotoSwipe);
+    Livewire.on('portfolioLoaded', checkAndInitPhotoSwipe);
 });
 
-// Reinitialize particles when the page content changes (for SPA navigation)
-document.addEventListener("livewire:navigated", () => {
-    initParticles();
-    if (document.querySelector("#gallery--dynamic-zoom-level")) {
-        loadPhotoSwipe();
-    }
+// Handle Livewire page updates
+Livewire.hook("message.processed", (message, component) => {
+    setTimeout(checkAndInitPhotoSwipe, 100); // Small delay to ensure DOM is updated
 });
 
 // Expose loadPhotoSwipe to window for manual triggering if needed
