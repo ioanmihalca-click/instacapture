@@ -31,7 +31,7 @@
         </p>
     </div>
 
-    <div class="w-full space-y-3"
+    <div class="w-full md:space-y-3"
          x-show="showContent"
          x-transition:enter="transition ease-out duration-1000 delay-1000"
          x-transition:enter-start="opacity-0 transform translate-y-4"
