@@ -14,7 +14,7 @@
          x-transition:enter-start="opacity-0 transform translate-y-4"
          x-transition:enter-end="opacity-100 transform translate-y-0">
         <h1 class="text-2xl font-bold leading-tight uppercase md:text-4xl font-roboto-condensed">
-            Salut! Eu sunt 
+            Salut! Eu sunt TEST
             <span class="block mt-2 text-3xl text-yellow-400 md:text-5xl" 
                   x-text="professions[currentIndex]"
                   x-transition:enter="transition ease-out duration-500"
