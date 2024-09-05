@@ -18,19 +18,33 @@ async function loadPhotoSwipe() {
 
 function initPhotoSwipe(PhotoSwipeLightbox, PhotoSwipe) {
     lightbox = new PhotoSwipeLightbox({
+        
         gallery: "#gallery--dynamic-zoom-level",
         children: "a",
         pswpModule: PhotoSwipe,
+        arrowKeys: true,
+        arrowPrev: true,
+        arrowNext: true,
         showHideAnimationType: "zoom",
         showAnimationDuration: 500,
         hideAnimationDuration: 500,
-        initialZoomLevel: (zoomLevelObject) => {
-            return isPhonePortrait() ? zoomLevelObject.vFill : zoomLevelObject.fit;
-        },
-        secondaryZoomLevel: (zoomLevelObject) => {
-            return isPhonePortrait() ? zoomLevelObject.fit : 1;
-        },
-        maxZoomLevel: 1,
+
+       initialZoomLevel: (zoomLevelObject) => {
+    if (isPhonePortrait()) {
+      return zoomLevelObject.vFill;
+    } else {
+      return zoomLevelObject.fit;
+    }
+  },
+  secondaryZoomLevel: (zoomLevelObject) => {
+    if (isPhonePortrait()) {
+      return zoomLevelObject.fit;
+    } else {
+      return 1;
+    }
+  },
+
+  maxZoomLevel: 1,
     });
 
     lightbox.on('beforeOpen', async () => {
