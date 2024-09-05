@@ -18,22 +18,22 @@ function initPhotoSwipe() {
         hideAnimationDuration: 500,
         pswpModule: () => import("photoswipe"),
         initialZoomLevel: (zoomLevelObject) => {
-            const { panAreaSize, elementSize } = zoomLevelObject;
-            const viewportRatio = panAreaSize.x / panAreaSize.y;
-            const imageRatio = elementSize.x / elementSize.y;
-
-            if (imageRatio < viewportRatio) {
-                // Portrait image
-                return isPhonePortrait() ? zoomLevelObject.vFill : zoomLevelObject.fit;
+            if (isPhonePortrait()) {
+                return zoomLevelObject.vFill;
             } else {
-                // Landscape or square image
                 return zoomLevelObject.fit;
             }
         },
         secondaryZoomLevel: (zoomLevelObject) => {
-            return isPhonePortrait() ? zoomLevelObject.fit : 1;
+            if (isPhonePortrait()) {
+                return zoomLevelObject.fit;
+            } else {
+                return 1;
+            }
         },
-        maxZoomLevel: 2,
+        maxZoomLevel: 1,
+
+        pswpModule: () => import("photoswipe"),
     });
 
     lightbox.on('beforeOpen', async () => {
