@@ -18,6 +18,7 @@ class Portofoliu extends Component
     public $perPage = 12;
     public $loadedItems = [];
     public $portfolioItems = [];
+    public $categories = [];
 
     protected $cloudinaryService;
 
@@ -30,6 +31,33 @@ class Portofoliu extends Component
     public function boot(CloudinaryService $cloudinaryService)
     {
         $this->cloudinaryService = $cloudinaryService;
+    }
+
+    public function mount()
+    {
+        $this->loadCategories();
+    }
+
+    protected function loadCategories()
+    {
+        $this->categories = Category::all();
+    }
+
+    public function getListeners()
+    {
+        return [
+            'categoryAdded' => 'handleCategoryChange',
+            'categoryDeleted' => 'handleCategoryChange',
+        ];
+    }
+
+    public function handleCategoryChange()
+    {
+        $this->loadCategories();
+        $this->resetPage();
+        $this->loadedItems = [];
+        $this->portfolioItems = [];
+        $this->loadMoreItems();
     }
 
     public function updatingSearch()
@@ -99,10 +127,6 @@ class Portofoliu extends Component
 
     public function render()
     {
-        $categories = Cache::remember('all_categories', now()->addHours(24), function () {
-            return Category::all();
-        });
-
         if (empty($this->portfolioItems)) {
             $this->loadMoreItems();
         }
@@ -111,7 +135,7 @@ class Portofoliu extends Component
 
         return view('livewire.portofoliu', [
             'portfolioItems' => $this->portfolioItems,
-            'categories' => $categories,
+            'categories' => $this->categories,
             'hasMoreItems' => $this->getPortfolioItemsQuery()->count() > count($this->loadedItems),
             'cloudinaryService' => $this->cloudinaryService
         ]);

@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Livewire\Component as Livewire;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CategoryResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -39,10 +40,18 @@ class CategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            Tables\Columns\TextColumn::make('name'),
-            Tables\Columns\TextColumn::make('slug'),
-        ])
+            ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('slug')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('pictures_count')
+                    ->label('Pictures')
+                    ->getStateUsing(function (Category $record): int {
+                        return $record->portfolioItems()->count();
+                    })
+                    ->sortable(),
+            ])
         ->filters([
             //
         ])
@@ -69,5 +78,15 @@ class CategoryResource extends Resource
             'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
+    }
+
+    public static function afterCreate(Category $record, array $data): void
+    {
+        Livewire::dispatchBrowserEvent('categoryAdded');
+    }
+
+    public static function afterDelete(Category $record): void
+    {
+        Livewire::dispatchBrowserEvent('categoryDeleted');
     }
 }
