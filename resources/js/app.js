@@ -139,6 +139,11 @@ document.addEventListener("livewire:load", () => {
             loadPhotoSwipe();
         }
     });
+
+    // Add this new event listener
+    Livewire.on('itemsLoaded', () => {
+        loadPhotoSwipe();
+    });
 });
 
 // Reinitialize particles when the page content changes (for SPA navigation)

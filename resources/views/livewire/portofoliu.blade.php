@@ -1,7 +1,3 @@
-@php
-    $cloudinaryService = app(App\Services\CloudinaryService::class);
-@endphp
-
 <div class="mt-24 md:p-8">
     <h2 class="mb-8 text-3xl font-bold text-center md:text-4xl lg:text-5xl">Portofoliu</h2>
 
@@ -27,46 +23,64 @@
     </div>
 
     @if (!empty($portfolioItems))
-        @foreach ($portfolioItems as $categoryName => $items)
-            <div class="mb-12">
-                <h3 class="mb-6 text-2xl font-semibold text-yellow-400 md:text-3xl">
-                    {{ $categoryName }}
-                </h3>
+        <div id="gallery--dynamic-zoom-level">
+            @foreach ($portfolioItems as $categoryName => $items)
+                <div class="mb-12">
+                    <h3 class="mb-6 text-2xl font-semibold text-yellow-400 md:text-3xl">
+                        {{ $categoryName }}
+                    </h3>
 
-                <div id="gallery--dynamic-zoom-level"
-                    class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    @foreach ($items as $item)
-                        @php
-                            $imageInfo = $cloudinaryService->getImageInfo($item->image_public_id);
-                        @endphp
-                        @if ($imageInfo)
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                        @foreach ($items as $item)
                             <a href="{{ $cloudinaryService->getImageUrl($item->image_public_id) }}"
                                 data-public-id="{{ $item->image_public_id }}"
-                                data-pswp-width="{{ $imageInfo['width'] ?? '' }}"
-                                data-pswp-height="{{ $imageInfo['height'] ?? '' }}"
+                                data-pswp-width="{{ $item->imageInfo['width'] ?? '' }}"
+                                data-pswp-height="{{ $item->imageInfo['height'] ?? '' }}"
                                 class="overflow-hidden transition-transform duration-300 rounded-lg shadow-lg portfolio-item hover:scale-105">
-                                <img src="{{ $cloudinaryService->getImageUrl($item->image_public_id, ['width' => 400, 'height' => 300, 'crop' => 'fill']) }}"
+                                <img src="{{ $cloudinaryService->getImageUrl($item->image_public_id, [
+                                    'width' => 400,
+                                    'height' => 300,
+                                    'crop' => 'fill',
+                                    'quality' => 'auto',
+                                    'fetch_format' => 'auto'
+                                ]) }}"
+                                    srcset="{{ $cloudinaryService->getImageUrl($item->image_public_id, [
+                                        'width' => 400,
+                                        'height' => 300,
+                                        'crop' => 'fill',
+                                        'quality' => 'auto',
+                                        'fetch_format' => 'auto'
+                                    ]) }} 1x,
+                                    {{ $cloudinaryService->getImageUrl($item->image_public_id, [
+                                        'width' => 800,
+                                        'height' => 600,
+                                        'crop' => 'fill',
+                                        'quality' => 'auto',
+                                        'fetch_format' => 'auto'
+                                    ]) }} 2x"
                                     alt="Portfolio image from {{ $categoryName }} category"
                                     class="object-cover w-full h-64 transition-transform duration-300 hover:scale-110"
                                     loading="lazy">
                                 <div class="hidden-caption" style="display: none;">{{ $item->caption ?? '' }}</div>
                             </a>
-                        @endif
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     @else
         <p class="text-center text-gray-400">Nu s-au găsit elemente în portofoliu.</p>
     @endif
 
-    @if ($paginator->hasPages())
-        <div class="mt-8">
-            {{ $paginator->links() }}
+    @if ($hasMoreItems)
+        <div class="mt-8 text-center">
+            <button wire:click="loadMoreItems" wire:loading.attr="disabled"
+                class="px-6 py-3 text-white transition duration-150 ease-in-out bg-yellow-400 rounded-full hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50">
+                <span wire:loading.remove>Încarcă mai multe</span>
+                <span wire:loading>Se încarcă...</span>
+            </button>
         </div>
     @endif
-
-
 
     @push('styles')
         @vite(['resources/css/app.css'])
@@ -75,5 +89,4 @@
     @push('scripts')
         @vite(['resources/js/app.js'])
     @endpush
-
 </div>

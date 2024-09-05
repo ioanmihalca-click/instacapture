@@ -7,6 +7,7 @@ use App\Models\PortfolioItem;
 use App\Models\Category;
 use Livewire\WithPagination;
 use App\Services\CloudinaryService;
+use Illuminate\Support\Facades\Cache;
 
 class Portofoliu extends Component
 {
@@ -15,6 +16,9 @@ class Portofoliu extends Component
     public $selectedCategory = null;
     public $search = '';
     public $perPage = 12;
+    public $loadedItems = [];
+    public $portfolioItems = [];
+
     protected $cloudinaryService;
 
     protected $queryString = [
@@ -31,24 +35,55 @@ class Portofoliu extends Component
     public function updatingSearch()
     {
         $this->resetPage();
+        $this->loadedItems = [];
+        $this->portfolioItems = [];
     }
 
     public function updatingSelectedCategory()
     {
         $this->resetPage();
+        $this->loadedItems = [];
+        $this->portfolioItems = [];
     }
 
     public function selectCategory($categoryId)
     {
         $this->selectedCategory = $categoryId;
         $this->resetPage();
+        $this->loadedItems = [];
+        $this->portfolioItems = [];
     }
 
-    public function getPortfolioItemsProperty()
+    public function loadMoreItems()
+    {
+        $newItems = $this->getPortfolioItemsQuery()
+            ->whereNotIn('id', $this->loadedItems)
+            ->take($this->perPage)
+            ->get();
+    
+        foreach ($newItems as $item) {
+            $imageInfo = $this->getImageInfo($item->image_public_id);
+            $item->imageInfo = $imageInfo;
+            $this->loadedItems[] = $item->id;
+        }
+    
+        $this->portfolioItems = collect($this->portfolioItems)->merge($newItems)->groupBy('category.name');
+    
+        // Dispatch the event after loading new items
+        $this->dispatch('itemsLoaded');
+    }
+    protected function getImageInfo($publicId)
+    {
+        return Cache::remember("image_info_{$publicId}", now()->addHours(24), function () use ($publicId) {
+            return $this->cloudinaryService->getImageInfo($publicId);
+        });
+    }
+
+    public function getPortfolioItemsQuery()
     {
         $query = PortfolioItem::with('category')
             ->orderBy('created_at', 'desc');
-        
+
         if ($this->selectedCategory) {
             $query->where('category_id', $this->selectedCategory);
         }
@@ -59,37 +94,23 @@ class Portofoliu extends Component
             });
         }
 
-        $items = $query->get();
-
-        // Fetch image info for each item
-        $items->each(function ($item) {
-            $imageInfo = $this->cloudinaryService->getImageInfo($item->image_public_id);
-            $item->imageInfo = $imageInfo;
-        });
-
-        // Group items by category and sort
-        $groupedItems = $items->groupBy('category.name')->map(function ($categoryItems) {
-            return $categoryItems->sortByDesc('created_at');
-        })->sortByDesc(function ($categoryItems) {
-            return $categoryItems->first()->created_at;
-        });
-
-        return $groupedItems;
+        return $query;
     }
 
     public function render()
     {
-        $categories = Category::all();
-        
+        $categories = Cache::remember('all_categories', now()->addHours(24), function () {
+            return Category::all();
+        });
+
+        if (empty($this->portfolioItems)) {
+            $this->loadMoreItems();
+        }
+
         return view('livewire.portofoliu', [
             'portfolioItems' => $this->portfolioItems,
             'categories' => $categories,
-            'paginator' => PortfolioItem::with('category')
-                ->when($this->selectedCategory, fn($query) => $query->where('category_id', $this->selectedCategory))
-                ->when($this->search, fn($query) => $query->whereHas('category', function($q) {
-                    $q->where('name', 'like', '%' . $this->search . '%');
-                }))
-                ->paginate($this->perPage),
+            'hasMoreItems' => $this->getPortfolioItemsQuery()->count() > count($this->loadedItems),
             'cloudinaryService' => $this->cloudinaryService
         ]);
     }
