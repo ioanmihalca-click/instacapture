@@ -211,7 +211,7 @@
         </a>
     </li>
     <li class="my-4">
-        <a wire:navigate href="{{ route('portofoliu') }}" 
+        <a href="{{ route('portofoliu') }}" 
            class="text-2xl hover:text-gray-300 {{ request()->routeIs('portofoliu') ? 'text-yellow-400 font-bold' : '' }}"
            @click="isMenuOpen = false">
             Portofoliu
