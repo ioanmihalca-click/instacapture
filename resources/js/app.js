@@ -1,45 +1,37 @@
-import "./bootstrap";
 import { tsParticles } from "tsparticles-engine";
 import { loadLinksPreset } from "tsparticles-preset-links";
 
-import PhotoSwipeLightbox from "photoswipe/lightbox";
-import "photoswipe/style.css";
+import 'photoswipe/style.css';
 
+let photoswipeLoaded = false;
+let lightbox = null;
 
-function initPhotoSwipe() {
-    const lightbox = new PhotoSwipeLightbox({
+async function loadPhotoSwipe() {
+    if (photoswipeLoaded) return;
 
-  
+    const PhotoSwipeLightbox = (await import('photoswipe/lightbox')).default;
+    const PhotoSwipe = (await import('photoswipe')).default;
+
+    photoswipeLoaded = true;
+    initPhotoSwipe(PhotoSwipeLightbox, PhotoSwipe);
+}
+
+function initPhotoSwipe(PhotoSwipeLightbox, PhotoSwipe) {
+    lightbox = new PhotoSwipeLightbox({
         gallery: "#gallery--dynamic-zoom-level",
         children: "a",
-        pswpModule: () => import("photoswipe"),
-        
+        pswpModule: PhotoSwipe,
         showHideAnimationType: "zoom",
         showAnimationDuration: 500,
         hideAnimationDuration: 500,
-       
         initialZoomLevel: (zoomLevelObject) => {
-            if (isPhonePortrait()) {
-                return zoomLevelObject.vFill;
-            } else {
-                return zoomLevelObject.fit;
-            }
+            return isPhonePortrait() ? zoomLevelObject.vFill : zoomLevelObject.fit;
         },
         secondaryZoomLevel: (zoomLevelObject) => {
-            if (isPhonePortrait()) {
-                return zoomLevelObject.fit;
-            } else {
-                return 1;
-            }
+            return isPhonePortrait() ? zoomLevelObject.fit : 1;
         },
         maxZoomLevel: 1,
-
-  
     });
-
-    function isPhonePortrait() {
-        return window.matchMedia("(max-width: 600px) and (orientation: portrait)").matches;
-    }
 
     lightbox.on('beforeOpen', async () => {
         const links = document.querySelectorAll('#gallery--dynamic-zoom-level a');
@@ -48,7 +40,6 @@ function initPhotoSwipe() {
                 const publicId = link.getAttribute('data-public-id');
                 if (publicId) {
                     try {
-                        // Updated URL to match the new route
                         const response = await fetch(`/image-info/${publicId}`);
                         const imageInfo = await response.json();
                         link.dataset.pswpWidth = imageInfo.width;
@@ -64,15 +55,9 @@ function initPhotoSwipe() {
     lightbox.init();
 }
 
-// Initialize PhotoSwipe after DOM content is loaded
-document.addEventListener("DOMContentLoaded", initPhotoSwipe);
-
-// Re-initialize PhotoSwipe after Livewire updates
-document.addEventListener("livewire:load", () => {
-    Livewire.hook("message.processed", (message, component) => {
-        initPhotoSwipe();
-    });
-});
+function isPhonePortrait() {
+    return window.matchMedia("(max-width: 600px) and (orientation: portrait)").matches;
+}
 
 const initParticles = async () => {
     await loadLinksPreset(tsParticles);
@@ -140,5 +125,29 @@ const initParticles = async () => {
 // Initialize particles on first load
 document.addEventListener("DOMContentLoaded", initParticles);
 
+// Lazy load PhotoSwipe when needed
+document.addEventListener("click", (event) => {
+    if (event.target.closest("#gallery--dynamic-zoom-level")) {
+        loadPhotoSwipe();
+    }
+});
+
+// Handle Livewire page updates
+document.addEventListener("livewire:load", () => {
+    Livewire.hook("message.processed", (message, component) => {
+        if (document.querySelector("#gallery--dynamic-zoom-level")) {
+            loadPhotoSwipe();
+        }
+    });
+});
+
 // Reinitialize particles when the page content changes (for SPA navigation)
-document.addEventListener("livewire:navigated", initParticles);
+document.addEventListener("livewire:navigated", () => {
+    initParticles();
+    if (document.querySelector("#gallery--dynamic-zoom-level")) {
+        loadPhotoSwipe();
+    }
+});
+
+// Expose loadPhotoSwipe to window for manual triggering if needed
+window.loadPhotoSwipe = loadPhotoSwipe;
