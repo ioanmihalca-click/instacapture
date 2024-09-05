@@ -23,7 +23,8 @@
 
     <!-- Styles -->
      @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="{{ asset('node_modules/photoswipe/dist/photoswipe.css') }}">
+
+    
     @livewireStyles
 
 
@@ -293,26 +294,6 @@
     @livewireScripts
 
 
-    <script type="module">
-        import PhotoSwipeLightbox from 'photoswipe/lightbox';
-        import 'photoswipe/style.css';
-
-        document.addEventListener('livewire:load', function() {
-            initPhotoSwipe();
-
-            Livewire.hook('message.processed', (message, component) => {
-                initPhotoSwipe();
-            });
-        });
-
-        function initPhotoSwipe() {
-            const lightbox = new PhotoSwipeLightbox({
-                gallery: '.portfolio-item',
-                children: 'a',
-                pswpModule: () => import('photoswipe')
-            });
-            lightbox.init();
-        }
-    </script>
+    
 </body>
 </html>

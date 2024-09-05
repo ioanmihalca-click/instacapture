@@ -5,9 +5,6 @@ import { loadLinksPreset } from "tsparticles-preset-links";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
 
-function isPhonePortrait() {
-    return window.matchMedia("(max-width: 600px) and (orientation: portrait)").matches;
-}
 
 function initPhotoSwipe() {
     const lightbox = new PhotoSwipeLightbox({
@@ -37,6 +34,10 @@ function initPhotoSwipe() {
 
         pswpModule: () => import("photoswipe"),
     });
+
+    function isPhonePortrait() {
+        return window.matchMedia("(max-width: 600px) and (orientation: portrait)").matches;
+    }
 
     lightbox.on('beforeOpen', async () => {
         const links = document.querySelectorAll('#gallery--dynamic-zoom-level a');
