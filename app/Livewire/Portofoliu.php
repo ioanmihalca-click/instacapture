@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\PortfolioItem;
 use App\Models\Category;
 use Livewire\WithPagination;
+use App\Services\CloudinaryService;
 
 class Portofoliu extends Component
 {
@@ -14,12 +15,18 @@ class Portofoliu extends Component
     public $selectedCategory = null;
     public $search = '';
     public $perPage = 12;
+    protected $cloudinaryService;
 
     protected $queryString = [
         'selectedCategory' => ['except' => ''],
         'search' => ['except' => ''],
         'perPage' => ['except' => 12],
     ];
+
+    public function boot(CloudinaryService $cloudinaryService)
+    {
+        $this->cloudinaryService = $cloudinaryService;
+    }
 
     public function updatingSearch()
     {
@@ -38,31 +45,38 @@ class Portofoliu extends Component
     }
 
     public function getPortfolioItemsProperty()
-{
-    $query = PortfolioItem::with('category')
-        ->orderBy('created_at', 'desc'); // Ordonează elementele după data creării, cele mai noi primele
-    
-    if ($this->selectedCategory) {
-        $query->where('category_id', $this->selectedCategory);
-    }
+    {
+        $query = PortfolioItem::with('category')
+            ->orderBy('created_at', 'desc');
+        
+        if ($this->selectedCategory) {
+            $query->where('category_id', $this->selectedCategory);
+        }
 
-    if ($this->search) {
-        $query->whereHas('category', function ($q) {
-            $q->where('name', 'like', '%' . $this->search . '%');
+        if ($this->search) {
+            $query->whereHas('category', function ($q) {
+                $q->where('name', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        $items = $query->get();
+
+        // Fetch image info for each item
+        $items->each(function ($item) {
+            $imageInfo = $this->cloudinaryService->getImageInfo($item->image_public_id);
+            $item->imageInfo = $imageInfo;
         });
+
+        // Group items by category and sort
+        $groupedItems = $items->groupBy('category.name')->map(function ($categoryItems) {
+            return $categoryItems->sortByDesc('created_at');
+        })->sortByDesc(function ($categoryItems) {
+            return $categoryItems->first()->created_at;
+        });
+
+        return $groupedItems;
     }
 
-    $items = $query->get();
-
-    // Grupează elementele după categorie și sortează categoriile după cea mai recentă postare
-    $groupedItems = $items->groupBy('category.name')->map(function ($categoryItems) {
-        return $categoryItems->sortByDesc('created_at');
-    })->sortByDesc(function ($categoryItems) {
-        return $categoryItems->first()->created_at;
-    });
-
-    return $groupedItems;
-}
     public function render()
     {
         $categories = Category::all();
@@ -75,7 +89,8 @@ class Portofoliu extends Component
                 ->when($this->search, fn($query) => $query->whereHas('category', function($q) {
                     $q->where('name', 'like', '%' . $this->search . '%');
                 }))
-                ->paginate($this->perPage)
+                ->paginate($this->perPage),
+            'cloudinaryService' => $this->cloudinaryService
         ]);
     }
 }

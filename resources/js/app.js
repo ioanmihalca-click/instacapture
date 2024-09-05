@@ -1,52 +1,77 @@
-import './bootstrap';
+import "./bootstrap";
 import { tsParticles } from "tsparticles-engine";
 import { loadLinksPreset } from "tsparticles-preset-links";
 
-import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
+import PhotoSwipeLightbox from "photoswipe/lightbox";
+import "photoswipe/style.css";
 
 function isPhonePortrait() {
-  return window.matchMedia('(max-width: 600px) and (orientation: portrait)').matches;
+    return window.matchMedia("(max-width: 600px) and (orientation: portrait)").matches;
 }
 
 function initPhotoSwipe() {
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: '#gallery--dynamic-zoom-level',
-    children: 'a',
-    initialZoomLevel: (zoomLevelObject) => {
-      if (isPhonePortrait()) {
-        return zoomLevelObject.vFill;
-      } else {
-        return zoomLevelObject.fit;
-      }
-    },
-    secondaryZoomLevel: (zoomLevelObject) => {
-      if (isPhonePortrait()) {
-        return zoomLevelObject.fit;
-      } else {
-        return 1;
-      }
-    },
-    maxZoomLevel: 1,
-    pswpModule: () => import('photoswipe')
-  });
-  lightbox.init();
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: "#gallery--dynamic-zoom-level",
+        children: "a",
+        showHideAnimationType: "zoom",
+        showAnimationDuration: 500,
+        hideAnimationDuration: 500,
+        pswpModule: () => import("photoswipe"),
+        initialZoomLevel: (zoomLevelObject) => {
+            const { panAreaSize, elementSize } = zoomLevelObject;
+            const viewportRatio = panAreaSize.x / panAreaSize.y;
+            const imageRatio = elementSize.x / elementSize.y;
+
+            if (imageRatio < viewportRatio) {
+                // Portrait image
+                return isPhonePortrait() ? zoomLevelObject.vFill : zoomLevelObject.fit;
+            } else {
+                // Landscape or square image
+                return zoomLevelObject.fit;
+            }
+        },
+        secondaryZoomLevel: (zoomLevelObject) => {
+            return isPhonePortrait() ? zoomLevelObject.fit : 1;
+        },
+        maxZoomLevel: 2,
+    });
+
+    lightbox.on('beforeOpen', async () => {
+        const links = document.querySelectorAll('#gallery--dynamic-zoom-level a');
+        for (const link of links) {
+            if (!link.dataset.pswpWidth || !link.dataset.pswpHeight) {
+                const publicId = link.getAttribute('data-public-id');
+                if (publicId) {
+                    try {
+                        // Updated URL to match the new route
+                        const response = await fetch(`/image-info/${publicId}`);
+                        const imageInfo = await response.json();
+                        link.dataset.pswpWidth = imageInfo.width;
+                        link.dataset.pswpHeight = imageInfo.height;
+                    } catch (error) {
+                        console.error('Error fetching image info:', error);
+                    }
+                }
+            }
+        }
+    });
+
+    lightbox.init();
 }
 
-// Inițializează PhotoSwipe după încărcarea DOM-ului
-document.addEventListener('DOMContentLoaded', initPhotoSwipe);
+// Initialize PhotoSwipe after DOM content is loaded
+document.addEventListener("DOMContentLoaded", initPhotoSwipe);
 
-// Reinițializează PhotoSwipe după actualizările Livewire
-document.addEventListener('livewire:load', () => {
-  Livewire.hook('message.processed', (message, component) => {
-    initPhotoSwipe();
-  });
+// Re-initialize PhotoSwipe after Livewire updates
+document.addEventListener("livewire:load", () => {
+    Livewire.hook("message.processed", (message, component) => {
+        initPhotoSwipe();
+    });
 });
-
 
 const initParticles = async () => {
     await loadLinksPreset(tsParticles);
-    
+
     await tsParticles.load("tsparticles", {
         preset: "links",
         background: {
@@ -108,7 +133,7 @@ const initParticles = async () => {
 };
 
 // Initialize particles on first load
-document.addEventListener('DOMContentLoaded', initParticles);
+document.addEventListener("DOMContentLoaded", initParticles);
 
 // Reinitialize particles when the page content changes (for SPA navigation)
-document.addEventListener('livewire:navigated', initParticles);
+document.addEventListener("livewire:navigated", initParticles);
