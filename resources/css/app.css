@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.pswp--custom-icon-colors {
+  --pswp-icon-color: #00fffc;
+  --pswp-icon-color-secondary: #333;
+}
+
 /* styles.css */
 nav ul li a {
     position: relative;

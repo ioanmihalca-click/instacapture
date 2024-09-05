@@ -11,12 +11,14 @@ function isPhonePortrait() {
 
 function initPhotoSwipe() {
     const lightbox = new PhotoSwipeLightbox({
+
+  
         gallery: "#gallery--dynamic-zoom-level",
         children: "a",
         showHideAnimationType: "zoom",
         showAnimationDuration: 500,
         hideAnimationDuration: 500,
-        pswpModule: () => import("photoswipe"),
+       
         initialZoomLevel: (zoomLevelObject) => {
             if (isPhonePortrait()) {
                 return zoomLevelObject.vFill;
