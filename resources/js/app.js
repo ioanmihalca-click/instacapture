@@ -12,6 +12,8 @@ function initPhotoSwipe() {
   
         gallery: "#gallery--dynamic-zoom-level",
         children: "a",
+        pswpModule: () => import("photoswipe"),
+        
         showHideAnimationType: "zoom",
         showAnimationDuration: 500,
         hideAnimationDuration: 500,
@@ -32,7 +34,7 @@ function initPhotoSwipe() {
         },
         maxZoomLevel: 1,
 
-        pswpModule: () => import("photoswipe"),
+  
     });
 
     function isPhonePortrait() {
