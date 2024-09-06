@@ -12,7 +12,7 @@
      <!-- Facebook Open Graph meta tags -->
     <meta property="og:title" content="{{ $title ?? 'InstaCapture' }}">
     <meta property="og:description" content="InstaCapture | Fotografie profesionala">
-    <meta property="og:image" content="{{ asset('assets/DE-PUS-Poza.jpg') }}" />
+    <meta property="og:image" content="{{ asset('assets/OG-instacapture.jpg') }}" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="InstaCapture | Fotografie Profesionala, Cluj sau oriunde in Romania" />
     <meta property="og:url" content="{{ url()->current() }}">
@@ -21,6 +21,112 @@
     <meta property="og:site_name" content="InstaCapture" />
 
      <!-- Local Business Schema Markup -->
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "InstaCapture | Fotografie Profesionala Cluj",
+  "description": "Servicii profesionale de fotografie, editare foto, design invitații nuntă, tipografie, grafică publicitară, editare video, și fotografie de produs și eveniment în Cluj-Napoca, Romania.",
+  "image": "https://www.instacapture.ro/logo-instacapture.jpg",
+  "url": "https://www.instacapture.ro",
+  "telephone": "+40754857466",
+  "email": "contact@instacapture.ro",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cluj-Napoca",
+    "addressCountry": "RO"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 46.7712,
+    "longitude": 23.6236
+  },
+  "sameAs": [
+    "https://www.facebook.com/paultutphoto",
+    "https://www.instagram.com/paul.tut.insta.capture"
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Fotografie",
+        "description": "Captură profesională pentru evenimente, portrete, și produse."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Editare Foto",
+        "description": "Retușare și îmbunătățire avansată a imaginilor."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Invitații Nuntă",
+        "description": "Design personalizat pentru invitații de nuntă memorabile."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Tipografie",
+        "description": "Servicii de imprimare de înaltă calitate pentru diverse materiale."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Grafică Publicitară",
+        "description": "Creație vizuală pentru branduri și campanii publicitare."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Editare Video",
+        "description": "Montaj și editare video pentru conținut dinamic și atractiv."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Fotografie de Produs",
+        "description": "Imagini profesionale pentru cataloage și e-commerce."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Fotografie de Eveniment",
+        "description": "Capturarea momentelor cheie din evenimente corporate sau private."
+      }
+    }
+  ]
+}
+</script>
+
   
 
     <!-- Favicon -->
