@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use App\Services\CloudinaryService;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PortfolioItemResource\Pages;
 use App\Filament\Resources\PortfolioItemResource\RelationManagers;
@@ -61,10 +62,20 @@ class PortfolioItemResource extends Resource
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
+            Tables\Actions\DeleteAction::make()
+                ->before(function (PortfolioItem $record) {
+                    $cloudinaryService = app(CloudinaryService::class);
+                    $cloudinaryService->deleteImage($record->image_public_id);
+                }),
         ])
         ->bulkActions([
-            Tables\Actions\DeleteBulkAction::make(),
+            Tables\Actions\DeleteBulkAction::make()
+                ->before(function (Collection $records) {
+                    $cloudinaryService = app(CloudinaryService::class);
+                    foreach ($records as $record) {
+                        $cloudinaryService->deleteImage($record->image_public_id);
+                    }
+                }),
         ]);
 }
 

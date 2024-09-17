@@ -78,4 +78,15 @@ class CloudinaryService
             return null;
         }
     }
+
+    public function deleteImage($publicId)
+    {
+        try {
+            $result = $this->cloudinary->uploadApi()->destroy($publicId);
+            return $result['result'] === 'ok';
+        } catch (\Exception $e) {
+            // Log the error or handle it as needed
+            return false;
+        }
+    }
 }
