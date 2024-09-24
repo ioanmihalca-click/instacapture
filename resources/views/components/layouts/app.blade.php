@@ -4,10 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="description" content="InstaCapture | Fotografie Profesionala, Cluj sau oriunde in Romania" />
-<meta name="keywords" content="InstaCapture, Fotografie Profesionala, Editare Foto, Fotograf Evenimente, Fotograf publicitate, Cluj, Romania" />    
-
-    <title>{{ $title ?? 'InstaCapture' }}</title>
+      <title>{{ $title ?? 'InstaCapture | Fotograf Profesionist în Cluj-Napoca' }}</title>
+    <meta name="description" content="InstaCapture oferă servicii de fotografie profesională în Cluj-Napoca și întreaga Românie. Specializat în fotografie de eveniment, portrete și fotografie comercială.">
+    <meta name="keywords" content="fotograf Cluj, fotografie profesională, fotograf evenimente Cluj, fotograf nuntă Cluj, InstaCapture, fotografie comercială">
+    <meta name="author" content="Paul Tut">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
 
      <!-- Facebook Open Graph meta tags -->
     <meta property="og:title" content="{{ $title ?? 'InstaCapture' }}">
@@ -209,7 +211,7 @@
                 <nav>
                     <!-- Mobile menu button -->
                     <div class="md:hidden">
-                        <button @click="isMenuOpen = !isMenuOpen"
+                        <button @click="isMenuOpen = !isMenuOpen" aria-label="Deschide meniul"
                             class="text-white hover:text-gray-300 focus:outline-none">
                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -401,7 +403,7 @@
 </div>
 
  <!-- Livewire Footer Component -->
-    {{-- <livewire:footer /> --}}
+    <livewire:footer />
     
     
     @livewireScripts

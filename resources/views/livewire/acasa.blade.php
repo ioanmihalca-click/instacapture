@@ -43,9 +43,9 @@
             Evenimente corporate sau private, concerte sau fotografii de produs profesionale.
             Portofoliul meu îți va oferi o perspectivă asupra stilului și calității muncii mele.
         </p>
-        {{-- <a href="{{ route('portofoliu') }}" 
-           class="inline-block px-8 py-4 text-lg font-semibold text-black transition-all duration-300 bg-yellow-400 rounded-full md:text-xl hover:bg-yellow-300 hover:shadow-lg hover:-translate-y-1">
-            Portofoliu
-        </a> --}}
+
+        {{-- <a href="{{ route('contact') }}" class="inline-block px-6 py-2 mt-12 text-lg font-bold text-black transition-colors duration-300 bg-yellow-400 rounded-full hover:bg-yellow-300">
+    Programează o Ședință Foto
+</a> --}}
     </div>
 </div>
