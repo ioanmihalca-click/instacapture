@@ -23,7 +23,7 @@ class Contact extends Component
         $this->validate();
 
         // Trimite email
-        Mail::to('ioanclickmihalca@gmail.com')->send(new ContactFormMail($this->name, $this->email, $this->message));
+        Mail::to('paultut@yahoo.com')->send(new ContactFormMail($this->name, $this->email, $this->message));
       
         // Resetează câmpurile formularului
         $this->reset(['name', 'email', 'message']);
