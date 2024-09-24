@@ -6,7 +6,7 @@
 
         <title>InstaCapture</title>
 
-       
+    @livewireStyles   
     </head>
     <body class="font-sans antialiase">
         
