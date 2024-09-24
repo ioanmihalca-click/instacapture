@@ -13,11 +13,11 @@
          x-transition:enter="transition ease-out duration-1000"
          x-transition:enter-start="opacity-0 transform translate-y-4"
          x-transition:enter-end="opacity-100 transform translate-y-0">
-        <h1 class="mb-4 text-2xl font-bold leading-tight uppercase md:text-3xl font-roboto-condensed">
-        InstaCapture | Fotografie Profesională în Cluj-Napoca
+        <h1 class="mb-4 text-lg font-bold uppercase md:text-3xl font-roboto-condensed">
+       Fotografie Profesională <br class="md:hidden"> în Cluj-Napoca
         </h1>
-        <p class="text-xl leading-relaxed text-gray-300">
-            Bine ați venit la InstaCapture! Sunt <span itemprop="name">Paul Țuț</span>,
+        <p class="text-lg leading-relaxed text-gray-300 md:text-xl">
+            Bine ai venit la InstaCapture! Sunt <span itemprop="name">Paul Țuț</span>,
             <span class="block mt-2 text-3xl font-semibold text-yellow-400 uppercase font-roboto-condensed md:text-5xl" 
                   x-text="professions[currentIndex]"
                   x-transition:enter="transition ease-out duration-500"
