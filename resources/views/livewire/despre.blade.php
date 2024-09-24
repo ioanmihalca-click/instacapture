@@ -16,15 +16,15 @@
          x-transition:enter-end="opacity-100">
         
         <p class="text-lg leading-relaxed text-gray-300">
-            De peste 10 ani ofer amintiri unice și sesiuni de fotografie memorabile, fie că este vorba despre evenimente în familie sau evenimente corporate.
+            Cu o experiență de peste 10 ani în fotografie profesională și o carieră îndelungată în televiziune, am dezvoltat o perspectivă unică asupra captării momentelor memorabile. Lucrul în televiziune mi-a adus un plus semnificativ de experiență, perfecționându-mi abilitățile de a surprinde acțiunea, emoția și detaliile într-un mod dinamic și captivant.
         </p>
 
         <p class="text-lg leading-relaxed text-gray-300">
             Mi s-a spus că sunt <span class="font-semibold text-yellow-400">efervescent, carismatic și comunicativ</span>, ceea ce face ca toată experiența să fie una dinamică și frumoasă, iar rezultatul pe măsura așteptărilor, cuvântul cheie fiind, bineînțeles, comunicarea.
         </p>
 
-        <p class="text-lg leading-relaxed text-gray-300">
-            Răsfoiește  <a class="text-yellow-400" href="{{ route('portofoliu') }}">portofoliul</a>. Dacă îți place ce vezi și ai nevoie de un fotograf, dă-mi un mesaj.
+         <p class="text-lg leading-relaxed text-gray-300">
+            Te invit să răsfoiești <a class="text-yellow-400 hover:underline" href="{{ route('portofoliu') }}">portofoliul meu</a>. Acolo vei găsi o selecție de lucrări care îmbină tehnicile profesionale din fotografie și televiziune. Dacă îți place ce vezi și ai nevoie de un fotograf cu o perspectivă unică, nu ezita să mă contactezi.
         </p>
     </div>
 
