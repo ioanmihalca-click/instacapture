@@ -1,7 +1,7 @@
 <div class="flex flex-col items-start justify-center h-full max-w-3xl px-4 mx-auto space-y-8 "     x-data="{ showContent: false }"
      x-init="setTimeout(() => showContent = true, 300)">
     
-    <h1 class="mt-24 text-2xl font-bold uppercase md:text-4xl font-roboto-condensed"
+    <h1 class="mt-24 text-2xl font-bold text-gray-100 uppercase md:text-4xl font-roboto-condensed"
         x-show="showContent"
         x-transition:enter="transition ease-out duration-500"
         x-transition:enter-start="opacity-0 transform -translate-y-4"

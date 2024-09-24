@@ -1,4 +1,4 @@
-<div class="flex flex-col items-start justify-center max-w-3xl px-2 mx-auto mt-8 space-y-8 md:mt-24"
+<div class="flex flex-col items-start justify-center max-w-3xl px-2 mx-auto mt-16 space-y-8 md:mt-24"
      x-data="{ 
          professions: ['Fotograf Profesionist', 'Editor Foto Expert', 'Cameraman Creativ'],
          currentIndex: 0,
@@ -13,7 +13,7 @@
          x-transition:enter="transition ease-out duration-1000"
          x-transition:enter-start="opacity-0 transform translate-y-4"
          x-transition:enter-end="opacity-100 transform translate-y-0">
-        <h1 class="mb-4 text-lg font-bold uppercase md:text-3xl font-roboto-condensed">
+        <h1 class="mb-4 text-lg font-bold text-gray-100 uppercase md:text-3xl font-roboto-condensed">
        Fotografie Profesională <br class="md:hidden"> în Cluj-Napoca
         </h1>
         <p class="text-lg leading-relaxed text-gray-300 md:text-xl">

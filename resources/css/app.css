@@ -29,18 +29,54 @@ nav ul li a {
   }
   
 
-        /* Custom scrollbar styling */
-        body::-webkit-scrollbar {
-            width: 9px;
-        }
+       /* Ascunde scrollbar-ul implicit al body-ului */
+    body {
+      overflow: hidden;
+  }
 
-        body::-webkit-scrollbar-thumb {
-          background: linear-gradient(to bottom, #facc15, #ffffff);
-            border-radius: 3px;
-        }
+  /* Stilizare pentru conținutul scrollabil din dreapta */
+  .overflow-y-auto {
+      scrollbar-width: thin;
+      scrollbar-color: linear-gradient(to bottom, #facc15, #ffffff);
+  }
 
-        body::-webkit-scrollbar-track {
-            background-color: #d1d5db;
-            border-radius: 3px;
-        }
-  
+  /* Webkit browsers (Chrome, Safari, newer versions of Edge) */
+  .overflow-y-auto::-webkit-scrollbar {
+      width: 9px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, #facc15, #ffffff);
+      border-radius: 3px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-track {
+      background-color: #d1d5db;
+      border-radius: 3px;
+  }
+
+  /* Firefox */
+  .overflow-y-auto {
+      scrollbar-width: thin;
+      scrollbar-color: #facc15 #d1d5db;
+  }
+
+  /* Edge and IE */
+  .overflow-y-auto {
+      -ms-overflow-style: none;
+  }
+
+  .overflow-y-auto::-ms-scrollbar {
+      width: 9px;
+  }
+
+  .overflow-y-auto::-ms-scrollbar-thumb {
+      background: linear-gradient(to bottom, #facc15, #ffffff);
+      border-radius: 3px;
+  }
+
+  .overflow-y-auto::-ms-scrollbar-track {
+      background-color: #d1d5db;
+      border-radius: 3px;
+  }
+
