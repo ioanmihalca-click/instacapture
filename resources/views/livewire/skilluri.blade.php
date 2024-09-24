@@ -2,10 +2,10 @@
 <div class="max-w-4xl min-h-screen px-4 py-8 mx-auto text-white md:py-12"
      x-data="{
          skills: [
-             { name: 'Fotografie', icon: 'camera', description: 'Capturarea momentelor unice cu creativitate și precizie.', progress: 95 },
-             { name: 'Editare Foto', icon: 'image', description: 'Prelucrare avansată pentru rezultate impresionante.', progress: 90 },
-             { name: 'Editare Video', icon: 'film', description: 'Montaj și editare video pentru conținut dinamic.', progress: 85 },
-             { name: 'Creativitate', icon: 'sparkles', description: 'Abordare inovatoare în fiecare proiect.', progress: 98 },
+             { name: 'Fotografie', icon: 'camera', description: 'Capturarea momentelor unice cu creativitate și precizie.', progress: 100 },
+             { name: 'Editare Foto', icon: 'image', description: 'Prelucrare avansată pentru rezultate impresionante.', progress: 100 },
+             { name: 'Editare Video', icon: 'film', description: 'Montaj și editare video pentru conținut dinamic.', progress: 95 },
+             { name: 'Creativitate', icon: 'sparkles', description: 'Abordare inovatoare în fiecare proiect.', progress: 100 },
              { name: 'Rapiditate', icon: 'lightning-bolt', description: 'Livrare promptă fără compromisuri de calitate.', progress: 92 }
          ],
          activeSkill: null,
