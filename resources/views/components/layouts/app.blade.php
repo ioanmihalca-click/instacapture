@@ -403,8 +403,10 @@
 </div>
 
  <!-- Livewire Footer Component -->
+ {{-- <div>
     <livewire:footer />
-    
+    </div>
+     --}}
     
     @livewireScripts
 
