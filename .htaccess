@@ -2,14 +2,14 @@
   
 RewriteEngine On
 
- Redirect from http:// and https://www to https://instacapture.ro (non-www)
- RewriteCond %{HTTP_HOST} ^(www\.)?instacapture\.ro [NC,OR]
- RewriteCond %{HTTP_HOST} ^instacapture\.ro [NC]
- RewriteCond %{HTTPS} off
- RewriteRule ^(.*)$ https://instacapture.ro/$1 [L,R=301]
+  # Redirect from http:// and https://www to https://instacapture.com (non-www)
+  # RewriteCond %{HTTP_HOST} ^(www\.)?clickstudiosdigital\.com [NC,OR]
+  # RewriteCond %{HTTP_HOST} ^clickstudiosdigital\.com [NC]
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^(.*)$ https://instacapture.com/$1 [L,R=301]
 
- RewriteCond %{HTTP_HOST} ^www\.instacapture\.ro [NC]
- RewriteRule ^(.*)$ https://instacapture.ro/$1 [L,R=301]
+  # RewriteCond %{HTTP_HOST} ^www\.instacapture\.com [NC]
+  # RewriteRule ^(.*)$ https://instacapture.com/$1 [L,R=301]
 
     # Internal rewrite to public directory
     RewriteRule ^$ public/ [L]
