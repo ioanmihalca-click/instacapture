@@ -4,7 +4,7 @@ namespace App\Livewire;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Despre | InstaCapture')]
+#[Title('Despre | InstaCapture Fotograf Profesionist în Cluj-Napoca')]
 
 class Despre extends Component
 {

@@ -3,11 +3,14 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\PortfolioItem;
 use App\Models\Category;
 use Livewire\WithPagination;
+use App\Models\PortfolioItem;
+use Livewire\Attributes\Title;
 use App\Services\CloudinaryService;
 use Illuminate\Support\Facades\Cache;
+
+#[Title('Portofoliu | InstaCapture Fotograf Profesionist în Cluj-Napoca')]
 
 class Portofoliu extends Component
 {

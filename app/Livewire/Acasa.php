@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Acasa | InstaCapture')]
+#[Title('Acasa | InstaCapture Fotograf Profesionist în Cluj-Napoca')]
 
 class Acasa extends Component
 {

@@ -4,7 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Mail\ContactFormMail;
+use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Mail;
+
+#[Title('Contact | InstaCapture Fotograf Profesionist în Cluj-Napoca')]
 
 class Contact extends Component
 {
