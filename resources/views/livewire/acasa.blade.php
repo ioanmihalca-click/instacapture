@@ -18,7 +18,7 @@
         </h1>
         <p class="text-lg leading-relaxed text-gray-300 md:text-xl">
             Bine ai venit la InstaCapture! Sunt <span itemprop="name">Paul Țuț</span>,
-            <span class="block mt-2 text-3xl font-semibold text-yellow-400 uppercase font-roboto-condensed md:text-5xl" 
+            <span class="block mt-2 text-3xl font-semibold text-yellow-400 uppercase font-roboto-condensed md:text-4xl" 
                   x-text="professions[currentIndex]"
                   x-transition:enter="transition ease-out duration-500"
                   x-transition:enter-start="opacity-0 transform translate-y-4"
@@ -38,7 +38,19 @@
          x-transition:enter="transition ease-out duration-1000 delay-1000"
          x-transition:enter-start="opacity-0 transform translate-y-4"
          x-transition:enter-end="opacity-100 transform translate-y-0">
-        <h2 class="text-2xl font-semibold text-yellow-400 md:text-3xl">
+      
+        <h3 class="mt-4 text-xl font-semibold text-yellow-400 uppercase md:text-2xl font-roboto-condensed">
+            Descoperă Portofoliul Meu
+        </h3>
+        <p class="text-lg leading-relaxed text-white">
+            Te invit să explorezi <a class="text-yellow-200 hover:underline" href="{{ route('portofoliu') }}">portofoliul meu de fotografie profesională</a>. Aici vei găsi exemple din proiectele mele recente, de la evenimente corporate în centrul Clujului până la nunți în împrejurimile pitorești, și de la concerte în Piața Unirii la fotografii de produs pentru afacerile locale.
+        </p>
+
+        <p class="mt-4 text-lg leading-relaxed text-white">
+            La InstaCapture, mă angajez să ofer nu doar fotografii, ci experiențe memorabile. Fiecare client este unic pentru mine, și abordez fiecare proiect cu atenție la detalii și dedicare pentru a captura esența momentelor speciale.
+        </p>
+
+          <h2 class="text-xl font-semibold text-yellow-400 font-roboto-condensed md:text-2xl">
             Serviciile Mele de Fotografie Profesională în Cluj
         </h2>
         <p class="text-lg leading-relaxed text-white">
@@ -56,17 +68,6 @@
 
         <p class="mt-4 text-lg leading-relaxed text-white">
             Abordez fiecare proiect cu creativitate și profesionalism, asigurându-mă că rezultatele depășesc așteptările clienților mei. Utilizez echipamente de ultimă generație și tehnici avansate de editare pentru a livra fotografii de cea mai înaltă calitate.
-        </p>
-
-        <h3 class="mt-6 text-xl font-semibold text-yellow-400">
-            Descoperă Portofoliul Meu
-        </h3>
-        <p class="text-lg leading-relaxed text-white">
-            Te invit să explorezi <a class="text-yellow-200 hover:underline" href="{{ route('portofoliu') }}">portofoliul meu de fotografie profesională</a>. Aici vei găsi exemple din proiectele mele recente, de la evenimente corporate în centrul Clujului până la nunți în împrejurimile pitorești, și de la concerte în Piața Unirii la fotografii de produs pentru afacerile locale.
-        </p>
-
-        <p class="mt-4 text-lg leading-relaxed text-white">
-            La InstaCapture, mă angajez să ofer nu doar fotografii, ci experiențe memorabile. Fiecare client este unic pentru mine, și abordez fiecare proiect cu atenție la detalii și dedicare pentru a captura esența momentelor speciale.
         </p>
 
         {{-- <a href="{{ route('contact') }}" class="inline-block px-6 py-3 mt-6 text-lg font-bold text-black transition-colors duration-300 bg-yellow-400 rounded-full hover:bg-yellow-300">
