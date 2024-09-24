@@ -1,4 +1,4 @@
-<div class="flex flex-col items-start justify-center max-w-3xl px-4 mx-auto mt-8 space-y-12 md:mt-24"
+<div class="flex flex-col items-start justify-center max-w-3xl px-2 mx-auto mt-8 space-y-12 md:mt-24"
      x-data="{ 
          professions: ['Fotograf', 'Editor foto', 'Cameraman'],
          currentIndex: 0,
@@ -8,17 +8,17 @@
          setInterval(() => { currentIndex = (currentIndex + 1) % professions.length }, 3000);
          setTimeout(() => showContent = true, 500);
      ">
-    <div class="space-y-6"
+    <div class=""
          x-show="showContent"
          x-transition:enter="transition ease-out duration-1000"
          x-transition:enter-start="opacity-0 transform translate-y-4"
          x-transition:enter-end="opacity-100 transform translate-y-0">
-        <h1 class="text-2xl font-bold leading-tight uppercase md:text-3xl font-roboto-condensed">
+        <h1 class="mb-4 text-2xl font-bold leading-tight uppercase md:text-3xl font-roboto-condensed">
         InstaCapture | Fotografie Profesionala
         </h1>
         <p class="text-xl leading-relaxed text-gray-300">
             Salut! Eu sunt <span itemprop="name">Paul Țuț</span>,
-            <span class="block mt-2 text-3xl text-yellow-400 uppercase font-roboto-condensed md:text-5xl" 
+            <span class="block mt-2 text-3xl font-semibold text-yellow-400 uppercase font-roboto-condensed md:text-5xl" 
                   x-text="professions[currentIndex]"
                   x-transition:enter="transition ease-out duration-500"
                   x-transition:enter-start="opacity-0 transform translate-y-4"
@@ -42,7 +42,7 @@
         <h2 class="inline-block pb-2 text-2xl font-semibold text-yellow-400 md:text-3xl">
             Descoperiți <a class="hover:text-yellow-200" href="{{ route('portofoliu') }}">Portofoliul Meu de Fotografie Profesională</a>
         </h2>
-        <p class="text-lg leading-relaxed text-white md:text-xl">
+        <p class="pb-4 text-lg leading-relaxed text-white md:text-xl">
             De la evenimente corporate în centrul Clujului până la nunți în împrejurimile pitorești, de la concerte în Piața Unirii la fotografii de produs pentru afacerile locale - portofoliul meu vă oferă o perspectivă asupra calității și versatilității serviciilor mele de fotografie în Cluj-Napoca.
         </p>
 

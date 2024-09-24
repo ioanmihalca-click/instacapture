@@ -6,7 +6,7 @@
         x-transition:enter="transition ease-out duration-500"
         x-transition:enter-start="opacity-0 transform -translate-y-4"
         x-transition:enter-end="opacity-100 transform translate-y-0">
-        Despre Mine
+         Despre Paul Țuț - Fotograf Profesionist în Cluj-Napoca
     </h1>
 
     <div class="space-y-6"
@@ -36,7 +36,7 @@
         
         <!-- Contact Information -->
         <div class="p-4 md:p-6">
-            <h2 class="mb-4 text-xl font-semibold text-yellow-400 md:text-2xl md:mb-6">Informații de Contact</h2>
+            <h2 class="mb-4 text-xl font-semibold text-yellow-400 md:text-2xl md:mb-6">Contactează Fotograful Tău din Cluj-Napoca</h2>
             <ul class="space-y-3 text-sm text-gray-300 md:text-base md:space-y-4">
                 <li class="flex items-center space-x-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400 md:w-6 md:h-6" viewBox="0 0 20 20" fill="currentColor">
@@ -48,13 +48,13 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400 md:w-6 md:h-6" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
                     </svg>
-                    <a href="https://wa.me/40754857466" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-yellow-400">WhatsApp</a>
+                    <a href="https://wa.me/40754857466" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-yellow-400">WhatsApp pentru programări rapide</a>
                 </li>
                 <li class="flex items-center space-x-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400 md:w-6 md:h-6" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                     </svg>
-                    <span>Cluj - Napoca</span>
+                    <span>Cluj-Napoca, disponibil pentru proiecte în tot județul Cluj</span>
                 </li>
                 <li class="flex items-start space-x-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400 md:w-6 md:h-6" viewBox="0 0 20 20" fill="currentColor">
@@ -67,6 +67,7 @@
                     </div>
                 </li>
             </ul>
+            
             
             <div class="mt-6 md:mt-8">
                 <h3 class="mb-3 text-lg font-semibold text-yellow-400 md:text-xl md:mb-4">Urmărește-mă</h3>
