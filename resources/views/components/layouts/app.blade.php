@@ -358,7 +358,7 @@
              'w-2/3 md:w-1/2 mt-12 md:mt-2': !isPortfolioPage,
              'w-full h-full mt-0': isPortfolioPage
          }">
-        <main class="flex-1 px-2 text-left" :class="{ 'p-0': isPortfolioPage }">
+        <main class="flex-1 text-left" :class="{ 'p-0': isPortfolioPage }">
             {{ $slot }}
         </main>
     </div>
