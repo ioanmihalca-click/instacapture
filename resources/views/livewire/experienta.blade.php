@@ -1,5 +1,5 @@
 <div>
-    <div class="max-w-4xl min-h-screen px-4 py-12 mx-auto text-white md:py-16 lg:py-20"
+    <div class="max-w-4xl min-h-screen px-4 py-16 mx-auto text-white lg:py-20"
      x-data="{ activeExperience: null }"
      x-init="() => {
          $nextTick(() => {

@@ -1,5 +1,5 @@
 <div>
-    <div class="max-w-4xl min-h-screen px-2 py-8 mx-auto text-white md:py-16 lg:py-20">
+    <div class="max-w-4xl min-h-screen px-2 py-8 py-16 mx-auto text-white lg:py-20">
         <h1 class="mb-6 text-2xl font-bold md:text-4xl">
             Contactează-mă
         </h1>
