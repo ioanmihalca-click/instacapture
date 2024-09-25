@@ -30,7 +30,7 @@ nav ul li a:hover::after {
 
 /* Modificare aici: permitem scroll-ul pe body */
 body {
-    overflow-y: auto;
+    
     -webkit-overflow-scrolling: touch; /* Pentru o experiență de scroll mai bună pe iOS */
 }
 
