@@ -1,10 +1,10 @@
 <div>
     <div class="max-w-2xl mt-8 min-h-screen px-2 py-16 mx-auto text-white ">
-        <h1 class="mb-6 text-2xl font-roboto-condensed uppercase md:text-left text-center font-bold md:text-4xl">
+        <h1 class="mb-6 text-2xl font-roboto-condensed uppercase text-left font-bold md:text-4xl">
             Contact
         </h1>
 
-        <p class="max-w-2xl mx-auto mb-8 text-base text-gray-300 md:text-left text-center md:text-lg ">
+        <p class="max-w-2xl mx-auto mb-8 text-base text-gray-300 text-left  md:text-lg ">
             Sunt aici pentru a răspunde întrebărilor tale și pentru a discuta despre viitoarele colaborări. Nu ezita să mă contactezi!
         </p>
 
