@@ -1,5 +1,5 @@
 <div>
-    <footer class="py-4 mt-8 text-gray-300 bg-gray-900 bg-opacity-75">
+    <footer class="py-4 mt-8 text-gray-300">
         <div class="container px-4 mx-auto">
             {{-- <div class="flex flex-col items-center justify-between md:flex-row"> --}}
                 <!-- Logo and motto -->
