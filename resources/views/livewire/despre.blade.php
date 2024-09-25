@@ -54,7 +54,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400 md:w-6 md:h-6" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                     </svg>
-                    <span>Cluj-Napoca, disponibil pentru proiecte în tot județul Cluj</span>
+                    <span>Cluj-Napoca, disponibil pentru proiecte în toata Romania</span>
                 </li>
                 <li class="flex items-start space-x-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400 md:w-6 md:h-6" viewBox="0 0 20 20" fill="currentColor">
