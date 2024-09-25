@@ -6,7 +6,7 @@
         x-transition:enter="transition ease-out duration-500"
         x-transition:enter-start="opacity-0 transform -translate-y-4"
         x-transition:enter-end="opacity-100 transform translate-y-0">
-         Despre Paul Țuț <br> Fotograf Profesionist în Cluj-Napoca
+         Despre <span class="text-yellow-400">Paul Țuț</span> <br> Fotograf Profesionist în Cluj-Napoca
     </h1>
 
     <div class="space-y-6"
@@ -16,7 +16,7 @@
          x-transition:enter-end="opacity-100">
         
         <p class="text-lg leading-relaxed text-gray-300">
-            Cu o experiență de peste 10 ani în fotografie profesională și o carieră îndelungată în televiziune, am dezvoltat o perspectivă unică asupra captării momentelor memorabile. Lucrul în televiziune mi-a adus un plus semnificativ de experiență, perfecționându-mi abilitățile de a surprinde acțiunea, emoția și detaliile într-un mod dinamic și captivant.
+            Cu o experiență de peste 10 ani în <span class="text-yellow-400 font-semibold">fotografia profesională</span> și o carieră îndelungată în televiziune, am dezvoltat o perspectivă unică asupra captării momentelor memorabile. Lucrul în televiziune mi-a adus un plus semnificativ de experiență, perfecționându-mi abilitățile de a surprinde acțiunea, emoția și detaliile într-un mod dinamic și captivant.
         </p>
 
         <p class="text-lg leading-relaxed text-gray-300">
@@ -35,7 +35,7 @@
          x-transition:enter-end="opacity-100 transform translate-y-0">
         
         <!-- Contact Information -->
-        <div class="p-4 md:p-6">
+        <div class="">
             <h2 class="mb-4 text-xl font-semibold text-yellow-400 md:text-2xl md:mb-6">Contactează Fotograful Tău din Cluj-Napoca</h2>
             <ul class="space-y-3 text-sm text-gray-300 md:text-base md:space-y-4">
                 <li class="flex items-center space-x-3">
