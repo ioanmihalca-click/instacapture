@@ -11,7 +11,6 @@ use App\Services\CloudinaryService;
 use Illuminate\Support\Facades\Cache;
 
 #[Title('Portofoliu | InstaCapture Fotograf Profesionist în Cluj-Napoca')]
-
 class Portofoliu extends Component
 {
     use WithPagination;
@@ -87,20 +86,66 @@ class Portofoliu extends Component
 
     public function loadMoreItems()
     {
+        if ($this->selectedCategory === null) {
+            $this->loadItemsForAllCategories();
+        } else {
+            $this->loadItemsForSelectedCategory();
+        }
+
+        $this->dispatch('itemsLoaded');
+    }
+
+    protected function loadItemsForAllCategories()
+    {
+        $loadedItemCount = count($this->loadedItems);
+        $itemsPerCategory = 4;
+        $categoriesToLoad = ceil(($loadedItemCount + $this->perPage) / $itemsPerCategory);
+
+        $newItems = collect();
+
+        foreach ($this->categories as $index => $category) {
+            if ($index >= $categoriesToLoad) break;
+
+            $categoryItems = PortfolioItem::where('category_id', $category->id)
+                ->whereNotIn('id', $this->loadedItems)
+                ->take($itemsPerCategory)
+                ->get();
+
+            foreach ($categoryItems as $item) {
+                $this->addItemInfo($item);
+                $newItems->push($item);
+            }
+        }
+
+        $this->updatePortfolioItems($newItems);
+    }
+
+    protected function loadItemsForSelectedCategory()
+    {
         $newItems = $this->getPortfolioItemsQuery()
             ->whereNotIn('id', $this->loadedItems)
             ->take($this->perPage)
             ->get();
-    
+
         foreach ($newItems as $item) {
-            $imageInfo = $this->getImageInfo($item->image_public_id);
-            $item->imageInfo = $imageInfo;
-            $this->loadedItems[] = $item->id;
+            $this->addItemInfo($item);
         }
-    
-        $this->portfolioItems = collect($this->portfolioItems)->merge($newItems);
-    
-        $this->dispatch('itemsLoaded');
+
+        $this->updatePortfolioItems($newItems);
+    }
+
+    protected function addItemInfo($item)
+    {
+        $imageInfo = $this->getImageInfo($item->image_public_id);
+        $item->imageInfo = $imageInfo;
+        $this->loadedItems[] = $item->id;
+    }
+
+    protected function updatePortfolioItems($newItems)
+    {
+        $this->portfolioItems = collect($this->portfolioItems)
+            ->merge($newItems)
+            ->groupBy('category.name');
     }
 
     protected function getImageInfo($publicId)
