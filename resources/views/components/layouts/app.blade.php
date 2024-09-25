@@ -203,10 +203,7 @@
             <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
         </div>
 
-
-
         <x-nav />
-
 
         <!-- Main content area -->
         <div x-bind:class="{
