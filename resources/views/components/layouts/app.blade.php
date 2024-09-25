@@ -13,6 +13,19 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ url()->current() }}">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTSF9VSD6Q"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YTSF9VSD6Q');
+    </script>
+
     <!-- Facebook Open Graph meta tags -->
     <meta property="og:title" content="{{ $title ?? 'InstaCapture' }}">
     <meta property="og:description" content="InstaCapture | Fotografie profesionala">
@@ -184,29 +197,30 @@
         </div>
 
         <!-- Left side with fixed photo background (hidden for portfolio page) -->
-          <div x-show="!isPortfolioPage" class="fixed top-[-10%] md:top-0 left-0 w-2/5 md:w-1/2 h-screen bg-center bg-cover z-0"
+        <div x-show="!isPortfolioPage"
+            class="fixed top-[-10%] md:top-0 left-0 w-2/5 md:w-1/2 h-screen bg-center bg-cover z-0"
             style="background-image: url('/assets/photo-bg.webp');">
             <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black "></div>
         </div>
 
 
 
-       <x-nav />
-       
+        <x-nav />
+
 
         <!-- Main content area -->
-           <div x-bind:class="{
+        <div x-bind:class="{
             'ml-[30%] sm:ml-[25%] md:ml-[40%] w-[80%] sm:w-3/4 md:w-3/5': !isPortfolioPage,
             'w-full': isPortfolioPage
         }"
             class="h-screen overflow-y-auto relative z-10">
-    <div class="content-gradient absolute inset-0"></div>
-    <div class="relative z-20 h-full overflow-y-auto p-2 md:pl-8">
-        <div class="text-white">
-            {{ $slot }}
+            <div class="content-gradient absolute inset-0"></div>
+            <div class="relative z-20 h-full overflow-y-auto p-2 md:pl-8">
+                <div class="text-white">
+                    {{ $slot }}
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
 
         <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -245,8 +259,8 @@
         </div>
 
         <!-- Livewire Footer Component -->
-   
-    {{-- <livewire:footer />
+
+        {{-- <livewire:footer />
     --}}
 
         @livewireScripts
