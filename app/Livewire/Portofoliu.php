@@ -24,6 +24,8 @@ class Portofoliu extends Component
 
     protected $cloudinaryService;
 
+    public $hasMoreItems = false;
+
     protected $queryString = [
         'selectedCategory' => ['except' => ''],
         'search' => ['except' => ''],
@@ -88,11 +90,19 @@ class Portofoliu extends Component
     {
         if ($this->selectedCategory === null) {
             $this->loadItemsForAllCategories();
+            $this->hasMoreItems = false; // Nu mai sunt elemente de încărcat pentru "Toate"
         } else {
             $this->loadItemsForSelectedCategory();
+            $this->checkIfHasMoreItems();
         }
 
         $this->dispatch('itemsLoaded');
+    }
+
+    protected function checkIfHasMoreItems()
+    {
+        $totalItems = $this->getPortfolioItemsQuery()->count();
+        $this->hasMoreItems = $totalItems > count($this->loadedItems);
     }
 
     protected function loadItemsForAllCategories()
@@ -184,7 +194,6 @@ class Portofoliu extends Component
         return view('livewire.portofoliu', [
             'portfolioItems' => $this->portfolioItems,
             'categories' => $this->categories,
-            'hasMoreItems' => $this->getPortfolioItemsQuery()->count() > count($this->loadedItems),
             'cloudinaryService' => $this->cloudinaryService
         ]);
     }

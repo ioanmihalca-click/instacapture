@@ -26,7 +26,7 @@
         <div id="gallery--dynamic-zoom-level">
             @foreach ($portfolioItems as $categoryName => $items)
                 <div class="mb-12">
-                    <h3 class="mb-6 text-2xl font-semibold text-yellow-400 md:text-3xl">
+                    <h3 class="mb-6 text-2xl font-semibold font-roboto-condensed text-yellow-400 md:text-3xl">
                         {{ $categoryName }}
                     </h3>
 
@@ -67,14 +67,27 @@
                             @endif
                         @endforeach
                     </div>
+
+                 @if ($selectedCategory === null)
+                        <div class="mt-4 text-center">
+                            <button wire:click="selectCategory('{{ $item->category->id }}')" class="inline-flex items-center text-yellow-400 hover:text-yellow-500">
+                                <span class="mr-2">Vezi toate din categoria {{ $categoryName }}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </button>
+                        </div>
+                    @endif
+
                 </div>
             @endforeach
+            
         </div>
     @else
         <p class="text-center text-gray-400">Nu s-au găsit elemente în portofoliu.</p>
     @endif
 
-    @if ($hasMoreItems)
+    @if ($hasMoreItems && $selectedCategory !== null)
         <div class="mt-8 text-center">
             <button wire:click="loadMoreItems" wire:loading.attr="disabled"
                 class="px-6 py-3 text-white transition duration-150 ease-in-out bg-yellow-400 rounded-full hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50">
