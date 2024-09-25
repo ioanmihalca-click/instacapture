@@ -10,7 +10,7 @@
             @foreach ($categories as $category)
                 <button wire:click="selectCategory('{{ $category->id }}')"
                     aria-label="Show {{ $category->name }} category"
-                    class="w-full px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full sm:w-auto md:text-base {{ $selectedCategory == $category->id ? 'bg-yellow-400 text-black' : 'bg-gray-700 text-white hover:bg-gray-600' }}">
+                    class="w-full px-4 py-2 text-sm font-medium font-roboto-condensed transition-colors duration-300 rounded-full sm:w-auto md:text-base {{ $selectedCategory == $category->id ? 'bg-yellow-400 text-black' : 'bg-gray-700 text-white hover:bg-gray-600' }}">
                     {{ $category->name }}
                 </button>
             @endforeach
@@ -26,7 +26,7 @@
         <div id="gallery--dynamic-zoom-level">
            @foreach ($portfolioItems->groupBy('category.name') as $categoryName => $items)
                 <div class="mb-12">
-                    <h3 class="mb-6 text-2xl font-semibold text-yellow-400 md:text-3xl">
+                    <h3 class="mb-6 text-2xl font-roboto-condensed uppercase font-semibold text-yellow-400 md:text-3xl">
                         {{ $categoryName }}
                     </h3>
 
