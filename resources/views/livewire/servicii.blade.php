@@ -16,7 +16,7 @@
      }"
      x-intersect="isInView = true">
 
-    <h1 class="mb-8 text-2xl font-bold text-center uppercase font-roboto-condensed md:text-4xl "
+    <h1 class="mb-8 mt-4 text-2xl font-bold text-center uppercase font-roboto-condensed md:text-4xl "
         x-intersect="$el.classList.add('animate-fade-in-up')">
         Serviciile mele
     </h1>
