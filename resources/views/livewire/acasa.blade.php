@@ -9,7 +9,7 @@
          setTimeout(() => showContent = true, 500);
      ">
      <div class="space-y-6 md:pr-24"
-         x-show="showContent"
+        x-cloak x-show="showContent"
          x-transition:enter="transition ease-out duration-1000"
          x-transition:enter-start="opacity-0 transform translate-y-4"
          x-transition:enter-end="opacity-100 transform translate-y-0">
@@ -27,7 +27,7 @@
             </span>
         </p>
         <p class="text-base leading-relaxed text-gray-300 md:text-xl"
-           x-show="showContent"
+          x-cloak x-show="showContent"
            x-transition:enter="transition ease-out duration-1000 delay-300"
            x-transition:enter-start="opacity-0 transform translate-y-4"
            x-transition:enter-end="opacity-100 transform translate-y-0">
@@ -36,7 +36,7 @@
     </div>
 
     <div class="w-full space-y-6 md:pr-24"
-     x-show="showContent"
+    x-cloak x-show="showContent"
      x-transition:enter="transition ease-out duration-1000 delay-1000"
      x-transition:enter-start="opacity-0 transform translate-y-4"
      x-transition:enter-end="opacity-100 transform translate-y-0">
@@ -48,7 +48,7 @@
         {type: 'a', content: 'Programează o Ședință Foto', class: 'inline-block px-6 py-2 my-6 text-xs font-bold text-black transition-colors duration-300 bg-yellow-400 rounded-full font-roboto-condensed md:text-base hover:bg-yellow-300', href: '{{ route('contact') }}'},
         {type: 'p', content: 'Abordez fiecare proiect cu creativitate și profesionalism, asigurându-mă că rezultatele depășesc așteptările clienților mei. Utilizez echipamente de ultimă generație și tehnici avansate de editare pentru a livra fotografii de cea mai înaltă calitate.', class: 'mt-4 text-base leading-relaxed text-white md:text-xl'}
     ]">
-        <div x-show="showContent"
+        <div x-cloak x-show="showContent"
              x-transition:enter="transition ease-out duration-1000"
              x-transition:enter-start="opacity-0 transform translate-y-4"
              x-transition:enter-end="opacity-100 transform translate-y-0"
@@ -66,7 +66,7 @@
     </template>
 
     <p class="text-base leading-relaxed text-white md:text-xl"
-       x-show="showContent"
+      x-cloak x-show="showContent"
        x-transition:enter="transition ease-out duration-1000"
        x-transition:enter-start="opacity-0 transform translate-y-4"
        x-transition:enter-end="opacity-100 transform translate-y-0"
@@ -76,7 +76,7 @@
     
     <div class="mt-8">
     <ul class="grid gap-6 md:grid-cols-2"
-        x-show="showContent" 
+       x-cloak x-show="showContent" 
         x-transition:enter="transition ease-out duration-1000"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"

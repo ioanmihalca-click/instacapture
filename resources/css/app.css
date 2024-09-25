@@ -6,6 +6,9 @@
 
 
 /* styles.css */
+
+[x-cloak] { display: none !important; }
+
 nav ul li a {
     position: relative;
     padding-bottom: 0.5rem;

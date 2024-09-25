@@ -80,7 +80,7 @@
         </div>
 
         <!-- Full-screen mobile menu -->
-        <div x-show="isMenuOpen" x-transition:enter="transition ease-out duration-200"
+        <<div x-cloak x-show="isMenuOpen"  x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-90"
