@@ -213,9 +213,9 @@
             'ml-[30%] sm:ml-[25%] md:ml-[40%] w-[80%] sm:w-3/4 md:w-3/5': !isPortfolioPage,
             'w-full': isPortfolioPage
         }"
-            class="h-screen overflow-y-auto relative z-10">
-            <div class="content-gradient absolute inset-0"></div>
-            <div class="relative z-20 h-full overflow-y-auto p-2 md:pl-8">
+            class="relative z-10 h-screen overflow-y-auto">
+            <div class="absolute inset-0 content-gradient"></div>
+            <div class="relative z-20 h-full p-2 overflow-y-auto md:pl-8">
                 <div class="text-white">
                     {{ $slot }}
                 </div>
@@ -258,10 +258,7 @@
             </div>
         </div>
 
-        <!-- Livewire Footer Component -->
 
-        {{-- <livewire:footer />
-    --}}
 
         @livewireScripts
 
