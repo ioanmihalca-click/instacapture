@@ -91,15 +91,15 @@ class Portofoliu extends Component
             ->whereNotIn('id', $this->loadedItems)
             ->take($this->perPage)
             ->get();
-
+    
         foreach ($newItems as $item) {
             $imageInfo = $this->getImageInfo($item->image_public_id);
             $item->imageInfo = $imageInfo;
             $this->loadedItems[] = $item->id;
         }
-
-        $this->portfolioItems = collect($this->portfolioItems)->merge($newItems)->groupBy('category.name');
-        
+    
+        $this->portfolioItems = collect($this->portfolioItems)->merge($newItems);
+    
         $this->dispatch('itemsLoaded');
     }
 
