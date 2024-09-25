@@ -24,49 +24,49 @@
 
     @if (!empty($portfolioItems))
         <div id="gallery--dynamic-zoom-level">
-            @foreach ($portfolioItems as $categoryName => $items)
-                <div class="mb-12">
-                    <h3 class="mb-6 text-2xl font-semibold text-yellow-400 md:text-3xl">
-                        {{ $categoryName }}
-                    </h3>
+           @foreach ($portfolioItems as $categoryName => $items)
+    <div class="mb-12">
+        <h3 class="mb-6 text-2xl font-semibold text-yellow-400 md:text-3xl">
+            {{ $categoryName }}
+        </h3>
 
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                        @foreach ($items as $item)
-                            <a href="{{ $cloudinaryService->getImageUrl($item->image_public_id) }}"
-                                data-public-id="{{ $item->image_public_id }}"
-                                data-pswp-width="{{ $item->imageInfo['width'] ?? '' }}"
-                                data-pswp-height="{{ $item->imageInfo['height'] ?? '' }}"
-                                class="overflow-hidden transition-transform duration-300 rounded-lg shadow-lg portfolio-item hover:scale-105">
-                                <img src="{{ $cloudinaryService->getImageUrl($item->image_public_id, [
-                                    'width' => 400,
-                                    'height' => 300,
-                                    'crop' => 'fill',
-                                    'quality' => 'auto',
-                                    'fetch_format' => 'auto'
-                                ]) }}"
-                                    srcset="{{ $cloudinaryService->getImageUrl($item->image_public_id, [
-                                        'width' => 400,
-                                        'height' => 300,
-                                        'crop' => 'fill',
-                                        'quality' => 'auto',
-                                        'fetch_format' => 'auto'
-                                    ]) }} 1x,
-                                    {{ $cloudinaryService->getImageUrl($item->image_public_id, [
-                                        'width' => 800,
-                                        'height' => 600,
-                                        'crop' => 'fill',
-                                        'quality' => 'auto',
-                                        'fetch_format' => 'auto'
-                                    ]) }} 2x"
-                                    alt="Portfolio image from {{ $categoryName }} category"
-                                    class="object-cover w-full h-64 transition-transform duration-300 hover:scale-110"
-                                    loading="lazy">
-                                <div class="hidden-caption" style="display: none;">{{ $item->caption ?? '' }}</div>
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            @foreach ($items as $item)
+                <a href="{{ $cloudinaryService->getImageUrl($item['image_public_id']) }}"
+                    data-public-id="{{ $item['image_public_id'] }}"
+                    data-pswp-width="{{ $item['imageInfo']['width'] ?? '' }}"
+                    data-pswp-height="{{ $item['imageInfo']['height'] ?? '' }}"
+                    class="overflow-hidden transition-transform duration-300 rounded-lg shadow-lg portfolio-item hover:scale-105">
+                    <img src="{{ $cloudinaryService->getImageUrl($item['image_public_id'], [
+                        'width' => 400,
+                        'height' => 300,
+                        'crop' => 'fill',
+                        'quality' => 'auto',
+                        'fetch_format' => 'auto'
+                    ]) }}"
+                    srcset="{{ $cloudinaryService->getImageUrl($item['image_public_id'], [
+                        'width' => 400,
+                        'height' => 300,
+                        'crop' => 'fill',
+                        'quality' => 'auto',
+                        'fetch_format' => 'auto'
+                    ]) }} 1x,
+                    {{ $cloudinaryService->getImageUrl($item['image_public_id'], [
+                        'width' => 800,
+                        'height' => 600,
+                        'crop' => 'fill',
+                        'quality' => 'auto',
+                        'fetch_format' => 'auto'
+                    ]) }} 2x"
+                    alt="Portfolio image from {{ $categoryName }} category"
+                    class="object-cover w-full h-64 transition-transform duration-300 hover:scale-110"
+                    loading="lazy">
+                <div class="hidden-caption" style="display: none;">{{ $item['caption'] ?? '' }}</div>
+                </a>
             @endforeach
+        </div>
+    </div>
+@endforeach
         </div>
     @else
         <p class="text-center text-gray-400">Nu s-au găsit elemente în portofoliu.</p>
