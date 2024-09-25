@@ -185,7 +185,7 @@
 
         <!-- Left side with fixed photo background (hidden for portfolio page) -->
         <div x-show="!isPortfolioPage" class="fixed top-0 left-0 w-1/3 h-screen bg-center bg-cover md:w-1/2"
-            style="background-image: url('/assets/photo-bg.jpg');">
+            style="background-image: url('/assets/photo-bg.webp');">
             <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
         </div>
 
