@@ -1,5 +1,5 @@
 <div class="mt-24 md:p-8">
-    <h2 class="mb-8 text-3xl font-bold text-center md:text-4xl lg:text-5xl">Portofoliu</h2>
+    <h2 class="mb-8 text-2xl font-bold font-roboto-condensed uppercase text-center md:text-4xl">Portofoliu</h2>
 
     <div class="mb-8">
         <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center">

@@ -17,7 +17,7 @@
          });
      }">
 
-    <h1 class="mb-8 mt-4 text-2xl font-bold font-roboto-condensed text-center md:text-4xl ">
+    <h1 class="mb-8 mt-4 text-2xl font-bold uppercase font-roboto-condensed text-center md:text-4xl ">
         Experiențe Profesionale
     </h1>
 
