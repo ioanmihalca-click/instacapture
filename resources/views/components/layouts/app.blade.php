@@ -184,26 +184,29 @@
         </div>
 
         <!-- Left side with fixed photo background (hidden for portfolio page) -->
-        <div x-show="!isPortfolioPage" class="fixed top-0 left-0 w-1/3 h-screen bg-center bg-cover md:w-1/2"
+          <div x-show="!isPortfolioPage" class="fixed top-0 left-0 w-2/5 md:w-1/2 h-screen bg-center bg-cover z-0"
             style="background-image: url('/assets/photo-bg.webp');">
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black/75 md:to-black "></div>
         </div>
+
 
 
        <x-nav />
        
 
         <!-- Main content area -->
-        <div x-bind:class="{
-            'ml-[33.333%] md:ml-[50%] w-2/3 md:w-1/2': !isPortfolioPage,
+           <div x-bind:class="{
+            'ml-[30%] sm:ml-[25%] md:ml-[40%] w-[80%] sm:w-3/4 md:w-3/5': !isPortfolioPage,
             'w-full': isPortfolioPage
         }"
-            class="h-screen overflow-y-auto bg-black bg-opacity-50">
-            <div class="p-2" :class="{ 'md:pl-8': !isPortfolioPage }">
-                {{ $slot }}
-            </div>
+            class="h-screen overflow-y-auto relative z-10">
+    <div class="content-gradient absolute inset-0"></div>
+    <div class="relative z-20 h-full overflow-y-auto p-2 md:pl-8">
+        <div class="text-white">
+            {{ $slot }}
         </div>
-
+    </div>
+</div>
 
 
         <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
