@@ -5,13 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'InstaCapture | Fotograf Profesionist în Cluj-Napoca' }}</title>
+    <link rel="canonical" href="{{ url()->current() }}">
+    
     <meta name="description"
         content="InstaCapture oferă servicii de fotografie profesională în Cluj-Napoca și întreaga Românie. Specializat în fotografie de eveniment, portrete și fotografie comercială.">
     <meta name="keywords"
         content="fotograf Cluj, fotografie profesională, fotograf evenimente Cluj, fotograf nuntă Cluj, InstaCapture, fotografie comercială">
     <meta name="author" content="Paul Tut">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{{ url()->current() }}">
+    
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTSF9VSD6Q"></script>
@@ -153,7 +155,7 @@
     <link rel="manifest" href="/assets/favicon/site.webmanifest">
     <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#000000">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -166,12 +168,6 @@
 
     @livewireStyles
 
-
-    <style>
-        [x-cloak] {
-            display: none !important;
-        }
-    </style>
 </head>
 
 <body class="font-sans bg-black">

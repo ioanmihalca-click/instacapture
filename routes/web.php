@@ -4,8 +4,10 @@
 use App\Livewire\Acasa;
 use App\Livewire\Despre;
 use App\Livewire\Contact;
+use App\Livewire\BlogShow;
 use App\Livewire\Servicii;
 use App\Livewire\Skilluri;
+use App\Livewire\BlogIndex;
 use App\Livewire\Experienta;
 use App\Livewire\Portofoliu;
 use App\Services\CloudinaryService;
@@ -25,3 +27,7 @@ Route::get('/image-info/{publicId}', function ($publicId) {
     $imageInfo = $cloudinaryService->getImageInfo($publicId);
     return response()->json($imageInfo);
 });
+
+//Blog
+Route::get('/blog', BlogIndex::class)->name('blog.index');
+Route::get('/blog/{slug}', BlogShow::class)->name('blog.show');
