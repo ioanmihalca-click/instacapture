@@ -69,6 +69,12 @@
                             </a>
                         </li>
                         <li>
+                            <a wire:navigate href="{{ route('blog.index') }}"
+                                class="hover:text-gray-300 {{ request()->routeIs('blog.index') ? 'text-yellow-400 font-bold' : '' }}">
+                                Blog
+                            </a>
+                        </li>
+                        <li>
                             <a wire:navigate href="{{ route('contact') }}"
                                 class="hover:text-gray-300 {{ request()->routeIs('contact') ? 'text-yellow-400 font-bold' : '' }}">
                                 Contact
@@ -150,6 +156,13 @@
                         class="text-2xl hover:text-gray-300 {{ request()->routeIs('portofoliu') ? 'text-yellow-400 font-bold' : '' }}"
                         @click="isMenuOpen = false">
                         Portofoliu
+                    </a>
+                </li>
+                <li class="my-4">
+                    <a wire:navigate href="{{ route('blog.index') }}"
+                        class="text-2xl hover:text-gray-300 {{ request()->routeIs('blog.index') ? 'text-yellow-400 font-bold' : '' }}"
+                        @click="isMenuOpen = false">
+                        Blog
                     </a>
                 </li>
                 <li class="my-4">
