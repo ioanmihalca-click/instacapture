@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{$meta_title ?? 'InstaCapture | Fotograf Profesionist în Cluj-Napoca' }}</title>
-     <link rel="canonical" href="{{ url()->current() }}" />
+    <title>{{ $meta_title ?? 'InstaCapture | Fotograf Profesionist în Cluj-Napoca' }}</title>
+    <link rel="canonical" href="{{ url()->current() }}" />
 
-    <meta name="description" content="{{ $meta_description ?? InstaCapture oferă servicii de fotografie profesională în Cluj-Napoca și întreaga Românie. Specializat în fotografie de eveniment, portrete și fotografie comercială. }}">
+    <meta name="description" content="{{ $meta_description ?? 'InstaCapture oferă servicii de fotografie profesională în Cluj-Napoca și întreaga Românie. Specializat în fotografie de eveniment, portrete și fotografie comercială.' }}">
 
-    <meta name="keywords" content="{{ $meta_keywords ??fotograf Cluj,Romania fotografie profesională, fotograf evenimente Cluj, fotograf nuntă Cluj, InstaCapture, fotografie comercială }}">
+    <meta name="keywords" content="{{ $meta_keywords ?? 'fotograf Cluj, Romania fotografie profesională, fotograf evenimente Cluj, fotograf nuntă Cluj, InstaCapture, fotografie comercială' }}">
 
     <meta name="author" content="Paul Tut">
     <meta name="robots" content="index, follow">
@@ -19,27 +19,22 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTSF9VSD6Q"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
         function gtag() {
             dataLayer.push(arguments);
         }
         gtag('js', new Date());
-
         gtag('config', 'G-YTSF9VSD6Q');
     </script>
 
     <!-- Facebook Open Graph meta tags -->
-    <meta property="og:title" content="{{ $title ?? 'InstaCapture' }}">
-    <meta property="og:description" content="InstaCapture | Fotografie profesionala">
-    <meta property="og:image" content="{{ asset('assets/OG-instacapture.jpg') }}" />
-    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:title" content="{{ $meta_title ?? 'InstaCapture' }}">
+    <meta property="og:description" content="{{ $meta_description ?? 'InstaCapture | Fotografie profesionala' }}">
+    <meta property="og:image" content="{{ $og_image ?? asset('assets/OG-instacapture.jpg') }}" />
     <meta property="og:image:alt" content="InstaCapture | Fotografie Profesionala, Cluj sau oriunde in Romania" />
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="article" />
     <meta property="og:locale" content="ro_RO" />
-    <meta property="og:site_name" content="InstaCapture" />
-
-    <!-- Local Business Schema Markup -->
+    <meta property="og:site_name" content="InstaCapture Blog" />
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
@@ -58,7 +53,19 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-
     @livewireStyles
-
 </head>
+
+<body class="font-sans bg-black">
+    <x-nav />
+
+    <main>
+        <div class="container mt-20">
+            {{ $slot }}
+        </div>
+    </main>
+
+    @livewireScripts
+</body>
+
+</html>
