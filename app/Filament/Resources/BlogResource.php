@@ -31,7 +31,7 @@ class BlogResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('meta_title')
                     ->maxLength(60)
-                    ->helperText('Optimal length is 50-60 characters'),
+                    ->helperText('Lungimea ideala este de 50-60 caractere'),
                 TinyEditor::make('content')
                     ->required()
                     ->columnSpanFull(),
@@ -41,15 +41,15 @@ class BlogResource extends Resource
                     ->imageResizeTargetWidth('1200')
                     ->imageResizeTargetHeight('630')
                     ->directory('blog-covers')
-                    ->helperText('Recommended dimensions: 1200x630 pixels'),
+                    ->helperText('Dimensiuni recomandate: 1200x630 pixels'),
                     Forms\Components\DateTimePicker::make('published_at')
                     ->label('Publish Date'),
             
                 Forms\Components\Textarea::make('meta_description')
                     ->maxLength(160)
-                    ->helperText('Optimal length is 150-160 characters'),
+                    ->helperText('Lungimea ideala este de 150-160 caractere'),
                 Forms\Components\TextInput::make('meta_keywords')
-                    ->helperText('Comma-separated keywords'),
+                    ->helperText('Cuvinte cheie separate cu virgula'),
             ]);
     }
 

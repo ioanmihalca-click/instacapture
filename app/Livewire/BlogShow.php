@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Blog;
 use Livewire\Component;
 
+
 class BlogShow extends Component
 {
     public $blog;

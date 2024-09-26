@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $meta_title ?? 'InstaCapture | Fotograf Profesionist în Cluj-Napoca' }}</title>
+    <title>{{ $meta_title ?? 'Blog InstaCapture | Fotograf Profesionist în Cluj-Napoca' }}</title>
     <link rel="canonical" href="{{ url()->current() }}" />
 
     <meta name="description" content="{{ $meta_description ?? 'InstaCapture oferă servicii de fotografie profesională în Cluj-Napoca și întreaga Românie. Specializat în fotografie de eveniment, portrete și fotografie comercială.' }}">
@@ -57,6 +57,27 @@
 </head>
 
 <body class="font-sans bg-black">
+    <div  x-data="{
+        isMenuOpen: false,
+        isTransitioning: false,
+        currentUrl: '{{ url()->current() }}',
+        isPortfolioPage: {{ request()->routeIs('portofoliu') ? 'true' : 'false' }}
+    }" x-on:livewire:navigating.window="isTransitioning = true"
+        x-on:livewire:navigated.window="
+          setTimeout(() => {
+              isTransitioning = false;
+          }, 300);
+          if ($event.detail && $event.detail.url) {
+              currentUrl = $event.detail.url;
+              isPortfolioPage = currentUrl.includes('portofoliu');
+          }
+      ">
+        <!-- Loading Indicator -->
+        <div x-show="isTransitioning"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="w-32 h-32 border-t-2 border-b-2 rounded-full border-x-yellow-400 animate-spin"></div>
+        </div>
+
     <x-nav />
 
     <main>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 #[Layout('components.layouts.blog')]
 #[Title('Blog - InstaCapture | Fotografie Profesionala Cluj, Romania')]
+
 class BlogIndex extends Component
 {
     use WithPagination;
@@ -43,11 +44,7 @@ class BlogIndex extends Component
 
         return view('livewire.blog-index', [
             'blogs' => $blogs,
-        ])
-        ->layoutData([
-            'meta_title' => 'Our Blog - Latest Posts',
-            'meta_description' => 'Read our latest blog posts on various topics.',
-            'meta_keywords' => 'blog, articles, news',
         ]);
+        
     }
 }
