@@ -196,30 +196,12 @@
             <div class="w-32 h-32 border-t-2 border-b-2 rounded-full border-x-yellow-400 animate-spin"></div>
         </div>
 
-  <!-- HTML -->
-<div x-show="!isPortfolioPage"
-    class="fixed inset-0 z-0 bg-center bg-cover background-container"
-    style="background-image: url('/assets/photo-bg-gradient.webp');">
-    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
-</div>
-
-<!-- CSS -->
-<style>
-    .background-container {
-        width: 40vw; /* 2/5 din lățimea viewport-ului */
-        height: 120vh; /* Înălțime mai mare pentru a compensa top-[-10%] */
-        top: -10vh; /* Echivalent cu top-[-10%] */
-        left: 0;
-    }
-
-    @media (min-width: 768px) {
-        .background-container {
-            width: 50vw; /* 1/2 din lățimea viewport-ului pentru desktop */
-            height: 100vh; /* Înălțime normală pentru desktop */
-            top: 0; /* Resetare top pentru desktop */
-        }
-    }
-</style>
+        <!-- Left side with fixed photo background (hidden for portfolio page) -->
+        <div x-show="!isPortfolioPage"
+            class="fixed top-[-10%] md:top-0 left-0 w-2/5 md:w-1/2 h-screen bg-center bg-cover z-0"
+            style="background-image: url('/assets/photo-bg-gradient.webp');">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
+        </div>
 
         <x-nav />
 
