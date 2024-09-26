@@ -79,14 +79,6 @@ class CloudinaryService
         }
     }
 
-    public function boot()
-    {
-        $tempDir = storage_path('app/temp_portfolio');
-        if (!is_dir($tempDir)) {
-            mkdir($tempDir, 0755, true);
-        }
-    }
-
     public function deleteImage($publicId)
     {
         try {

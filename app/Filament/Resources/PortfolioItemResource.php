@@ -32,23 +32,15 @@ class PortfolioItemResource extends Resource
                 ->label('Category')
                 ->options(\App\Models\Category::all()->pluck('name', 'id'))
                 ->required(),
-                Forms\Components\FileUpload::make('image')
+            Forms\Components\FileUpload::make('image')
                 ->image()
                 ->maxSize(10024)
-                ->directory('temp_portfolio')
-                ->disk('local')
-                ->visibility('private')
+                ->directory('portfolio')
                 ->afterStateUpdated(function ($state, callable $set) {
                     if ($state) {
                         $cloudinaryService = app(CloudinaryService::class);
-                        $tempPath = storage_path('app/temp_portfolio/' . $state);
-                        $result = $cloudinaryService->uploadImage($tempPath);
+                        $result = $cloudinaryService->uploadImage($state);
                         $set('image_public_id', $result['public_id']);
-                        
-                        // Ștergem fișierul temporar după încărcare
-                        if (file_exists($tempPath)) {
-                            unlink($tempPath);
-                        }
                     }
                 }),
             Forms\Components\Hidden::make('image_public_id'),
@@ -92,19 +84,6 @@ class PortfolioItemResource extends Resource
         return [
             //
         ];
-    }
-
-    protected function afterSave(): void
-    {
-        $tempDir = storage_path('app/temp_portfolio');
-        if (is_dir($tempDir)) {
-            $files = glob($tempDir . '/*');
-            foreach($files as $file) {
-                if(is_file($file)) {
-                    unlink($file);
-                }
-            }
-        }
     }
 
     protected function getRedirectUrl(): string
