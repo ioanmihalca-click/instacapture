@@ -4,31 +4,46 @@
     <loc>https://instacapture.ro/</loc>
     <lastmod>2024-09-24T09:50:54+00:00</lastmod>
     <priority>1.00</priority>
-    <changefreq>monthly</changefreq>
+   
   </url>
+  
   <url>
     <loc>https://instacapture.ro/despre</loc>
     <lastmod>2024-09-24T09:50:54+00:00</lastmod>
-    <priority>0.80</priority>
-    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    
   </url>
+
+  <url>
+<loc>https://instacapture.ro/blog</loc>
+<lastmod>2024-09-26T22:14:49+00:00</lastmod>
+<priority>0.90</priority>
+<changefreq>monthly</changefreq>
+</url>
+
+<url>
+<loc>https://instacapture.ro/blog/top-10-locatii-pentru-sedinte-foto-in-cluj-napoca-ghidul-fotografului-local</loc>
+<lastmod>2024-09-26T22:14:49+00:00</lastmod>
+<priority>0.90</priority>
+</url>
+
   <url>
     <loc>https://instacapture.ro/skilluri</loc>
     <lastmod>2024-09-24T09:50:54+00:00</lastmod>
     <priority>0.80</priority>
-    <changefreq>monthly</changefreq>
+ 
   </url>
   <url>
     <loc>https://instacapture.ro/servicii</loc>
     <lastmod>2024-09-24T09:50:54+00:00</lastmod>
     <priority>0.80</priority>
-    <changefreq>monthly</changefreq>
+   
   </url>
   <url>
     <loc>https://instacapture.ro/experienta</loc>
     <lastmod>2024-09-24T09:50:54+00:00</lastmod>
     <priority>0.80</priority>
-    <changefreq>monthly</changefreq>
+  
   </url>
   <url>
     <loc>https://instacapture.ro/portofoliu</loc>
@@ -40,6 +55,6 @@
     <loc>https://instacapture.ro/contact</loc>
     <lastmod>2024-09-24T09:50:54+00:00</lastmod>
     <priority>0.80</priority>
-    <changefreq>monthly</changefreq>
+   
   </url>
 </urlset>
