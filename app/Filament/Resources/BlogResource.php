@@ -49,7 +49,7 @@ class BlogResource extends Resource
                     ->maxLength(160)
                     ->helperText('Lungimea ideala este de 150-160 caractere'),
                 Forms\Components\TextInput::make('meta_keywords')
-                    ->helperText('Cuvinte cheie separate cu virgula'),
+                    ->helperText('Cuvinte cheie separate cu virgula, maxim 255 caractere'),
             ]);
     }
 
