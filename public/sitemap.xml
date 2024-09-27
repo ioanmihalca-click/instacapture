@@ -11,14 +11,19 @@
     <loc>https://instacapture.ro/despre</loc>
     <lastmod>2024-09-24T09:50:54+00:00</lastmod>
     <priority>0.90</priority>
-    
   </url>
 
-  <url>
+<url>
 <loc>https://instacapture.ro/blog</loc>
 <lastmod>2024-09-26T22:14:49+00:00</lastmod>
 <priority>0.90</priority>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
+</url>
+
+<url>
+<loc>https://instacapture.ro/blog/ghidul-complet-al-fotografiei-de-nunta-in-cluj-napoca</loc>
+<lastmod>2024-09-27T07:50:30+00:00</lastmod>
+<priority>0.90</priority>
 </url>
 
 <url>
@@ -27,12 +32,12 @@
 <priority>0.90</priority>
 </url>
 
-  <url>
-    <loc>https://instacapture.ro/skilluri</loc>
-    <lastmod>2024-09-24T09:50:54+00:00</lastmod>
-    <priority>0.80</priority>
- 
-  </url>
+<url>
+<loc>https://instacapture.ro/skilluri</loc>
+<lastmod>2024-09-24T09:50:54+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+
   <url>
     <loc>https://instacapture.ro/servicii</loc>
     <lastmod>2024-09-24T09:50:54+00:00</lastmod>
