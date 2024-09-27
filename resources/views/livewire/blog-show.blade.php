@@ -1,5 +1,5 @@
 <div class="text-gray-100">
-    <div class="container max-w-4xl px-4 py-12 mx-auto">
+    <div class="container max-w-4xl px-4 py-4 mx-auto md:py-12">
         <article class="overflow-hidden bg-gray-800 shadow-2xl rounded-xl">
             @if($blog->cover_image)
                 <div class="relative">

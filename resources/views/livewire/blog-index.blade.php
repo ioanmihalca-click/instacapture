@@ -1,4 +1,4 @@
-<div class="container px-4 py-12 mx-auto max-w-7xl">
+<div class="container px-4 mx-auto md:py-12 max-w-7xl">
     <h1 class="mb-12 text-3xl font-bold text-center text-yellow-400 uppercase md:text-5xl font-roboto-condensed">
         Articole pe Blog
     </h1>
