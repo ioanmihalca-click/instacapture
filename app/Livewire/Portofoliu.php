@@ -8,15 +8,16 @@ use App\Models\PortfolioItem;
 use Livewire\Attributes\Title;
 use App\Services\CloudinaryService;
 use Illuminate\Support\Facades\Cache;
+use Livewire\WithPagination;
 
 #[Title('Portofoliu | InstaCapture Fotograf Profesionist în Cluj-Napoca')]
 class Portofoliu extends Component
 {
+    use WithPagination;
+
     public $selectedCategory = null;
     public $search = '';
-    public $portfolioItems = [];
     public $categories = [];
-
     protected $cloudinaryService;
 
     protected $queryString = [
@@ -32,7 +33,6 @@ class Portofoliu extends Component
     public function mount()
     {
         $this->loadCategories();
-        $this->loadPortfolioItems();
     }
 
     protected function loadCategories()
@@ -48,15 +48,15 @@ class Portofoliu extends Component
     public function selectCategory($categoryId)
     {
         $this->selectedCategory = $categoryId;
-        $this->loadPortfolioItems();
+        $this->resetPage();
     }
 
     public function updatedSearch()
     {
-        $this->loadPortfolioItems();
+        $this->resetPage();
     }
 
-    protected function loadPortfolioItems()
+    protected function getPortfolioItems()
     {
         $query = PortfolioItem::with('category')->orderBy('created_at', 'desc');
 
@@ -70,44 +70,49 @@ class Portofoliu extends Component
             });
         }
 
-        $items = $query->get();
-
-        $groupedItems = [];
-        foreach ($items as $item) {
-            $categoryName = $item->category->name;
-            if (!isset($groupedItems[$categoryName])) {
-                $groupedItems[$categoryName] = [];
-            }
-            $groupedItems[$categoryName][] = [
-                'id' => $item->id,
-                'image_public_id' => $item->image_public_id,
-                'caption' => $item->caption,
-                'category_id' => $item->category_id,
-                'imageInfo' => $this->getImageInfo($item->image_public_id),
-            ];
-        }
-
-        // Dacă nicio categorie nu este selectată, limitează fiecare categorie la 4 elemente
-        if ($this->selectedCategory === null) {
-            foreach ($groupedItems as $categoryName => $items) {
-                $groupedItems[$categoryName] = array_slice($items, 0, 4);
-            }
-        }
-
-        $this->portfolioItems = $groupedItems;
+        $perPage = $this->selectedCategory ? 20 : 1000; // A large number to get all items when no category is selected
+        return $query->paginate($perPage);
     }
 
-    protected function getImageInfo($publicId)
+    protected function getImageInfoBulk($publicIds)
     {
-        return Cache::remember("image_info_{$publicId}", now()->addHours(24), function () use ($publicId) {
-            return $this->cloudinaryService->getImageInfo($publicId);
+        $cacheKey = 'cloudinary_image_info_bulk_' . md5(json_encode($publicIds));
+
+        return Cache::remember($cacheKey, now()->addHours(24), function () use ($publicIds) {
+            return $this->cloudinaryService->getImageInfoBulk($publicIds);
         });
     }
 
     public function render()
     {
+        $portfolioItems = $this->getPortfolioItems();
+        $publicIds = $portfolioItems->pluck('image_public_id')->unique()->toArray();
+        $imageInfos = $this->getImageInfoBulk($publicIds);
+
+        $groupedItems = [];
+        foreach ($portfolioItems as $item) {
+            $categoryName = $item->category->name;
+            if (!isset($groupedItems[$categoryName])) {
+                $groupedItems[$categoryName] = [
+                    'items' => [],
+                    'category_id' => $item->category_id
+                ];
+            }
+            if ($this->selectedCategory || count($groupedItems[$categoryName]['items']) < 4) {
+                $groupedItems[$categoryName]['items'][] = [
+                    'id' => $item->id,
+                    'image_public_id' => $item->image_public_id,
+                    'caption' => $item->caption,
+                    'category_id' => $item->category_id,
+                    'imageInfo' => $imageInfos[$item->image_public_id] ?? null,
+                ];
+            }
+        }
+
         return view('livewire.portofoliu', [
-            'cloudinaryService' => $this->cloudinaryService
+            'cloudinaryService' => $this->cloudinaryService,
+            'groupedItems' => $groupedItems,
+            'portfolioItems' => $portfolioItems,
         ]);
     }
 }

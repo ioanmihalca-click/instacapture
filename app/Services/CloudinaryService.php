@@ -18,14 +18,12 @@ class CloudinaryService
         $this->cloudinary = new Cloudinary(config('cloudinary.url'));
     }
 
-
     public function uploadImage($file, $folder = null)
     {
         $options = [
             'folder' => $folder,
         ];
 
-        // Check if $file is a string (file path) or an object
         $filePath = is_string($file) ? $file : $file->getRealPath();
 
         $result = $this->cloudinary->uploadApi()->upload($filePath, $options);
@@ -76,6 +74,37 @@ class CloudinaryService
         } catch (\Exception $e) {
             // Log the error or handle it as needed
             return null;
+        }
+    }
+
+    public function getImageInfoBulk($publicIds)
+    {
+        $cacheKey = "cloudinary_image_info_bulk_" . md5(json_encode($publicIds));
+
+        if (Cache::has($cacheKey)) {
+            return Cache::get($cacheKey);
+        }
+
+        try {
+            $results = $this->cloudinary->adminApi()->assets(['public_ids' => $publicIds])->getArrayCopy();
+            $imageInfos = [];
+
+            foreach ($results['resources'] as $result) {
+                $imageInfos[$result['public_id']] = [
+                    'width' => $result['width'],
+                    'height' => $result['height'],
+                    'format' => $result['format'],
+                    'resource_type' => $result['resource_type'],
+                    'created_at' => $result['created_at'],
+                ];
+            }
+
+            Cache::put($cacheKey, $imageInfos, $this->cacheTimeout);
+
+            return $imageInfos;
+        } catch (\Exception $e) {
+            // Log the error or handle it as needed
+            return [];
         }
     }
 

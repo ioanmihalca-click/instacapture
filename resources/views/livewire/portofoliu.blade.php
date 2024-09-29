@@ -1,5 +1,5 @@
 <div class="mt-24 md:p-8">
-    <h2 class="mb-8 text-2xl font-bold font-roboto-condensed uppercase text-center md:text-4xl">Portofoliu</h2>
+    <h2 class="mb-8 text-2xl font-bold text-center uppercase font-roboto-condensed md:text-4xl">Portofoliu</h2>
 
     <div class="mb-8">
         <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center">
@@ -22,16 +22,16 @@
         <p>Încărcare...</p>
     </div>
 
-    @if (!empty($portfolioItems))
+    @if (!empty($groupedItems))
         <div id="gallery--dynamic-zoom-level">
-            @foreach ($portfolioItems as $categoryName => $items)
+            @foreach ($groupedItems as $categoryName => $categoryData)
                 <div class="mb-12">
-                    <h3 class="mb-6 text-2xl font-semibold font-roboto-condensed text-yellow-400 md:text-3xl">
+                    <h3 class="mb-6 text-2xl font-semibold text-yellow-400 font-roboto-condensed md:text-3xl">
                         {{ $categoryName }}
                     </h3>
 
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                        @foreach ($items as $item)
+                        @foreach ($categoryData['items'] as $item)
                             <a href="{{ $cloudinaryService->getImageUrl($item['image_public_id']) }}"
                                 data-public-id="{{ $item['image_public_id'] }}"
                                 data-pswp-width="{{ $item['imageInfo']['width'] ?? '' }}"
@@ -66,9 +66,9 @@
                         @endforeach
                     </div>
 
-                    @if ($selectedCategory === null)
+                    @if ($selectedCategory === null && count($categoryData['items']) >= 4)
                         <div class="mt-4 text-center">
-                            <button wire:click="selectCategory('{{ $items[0]['category_id'] }}')" class="inline-flex items-center text-yellow-400 hover:text-yellow-500">
+                            <button wire:click="selectCategory('{{ $categoryData['category_id'] }}')" class="inline-flex items-center text-yellow-400 hover:text-yellow-500">
                                 <span class="mr-2">Vezi toate din categoria {{ $categoryName }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -79,6 +79,10 @@
                 </div>
             @endforeach
         </div>
+        
+        @if ($selectedCategory !== null)
+            {{ $portfolioItems->links() }}
+        @endif
     @else
         <p class="text-center text-gray-400">Nu s-au găsit elemente în portofoliu.</p>
     @endif
