@@ -69,7 +69,7 @@ class Portofoliu extends Component
             });
         }
 
-        $perPage = $this->selectedCategory ? 20 : 100; // Reduced from 1000 to 100
+        $perPage = $this->selectedCategory ? 20 : 1000; 
         return $query->paginate($perPage);
     }
 
