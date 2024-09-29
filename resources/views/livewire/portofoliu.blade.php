@@ -86,4 +86,6 @@
     @else
         <p class="text-center text-gray-400">Nu s-au găsit elemente în portofoliu.</p>
     @endif
+
+   
 </div>

@@ -15,6 +15,8 @@ class Portofoliu extends Component
 {
     use WithPagination;
 
+    protected $paginationTheme = 'tailwind';
+
     public $selectedCategory = null;
     public $search = '';
     public $categories = [];
@@ -25,10 +27,13 @@ class Portofoliu extends Component
         'search' => ['except' => ''],
     ];
 
+
     public function boot(CloudinaryService $cloudinaryService)
     {
         $this->cloudinaryService = $cloudinaryService;
     }
+
+   
 
     public function mount()
     {
