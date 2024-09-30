@@ -17,7 +17,7 @@
          });
      }">
 
-    <h1 class="mb-8 mt-4 text-2xl font-bold uppercase font-roboto-condensed text-center md:text-4xl ">
+    <h1 class="mt-4 mb-8 text-2xl font-bold text-center uppercase font-roboto-condensed md:text-4xl ">
         Experiențe Profesionale
     </h1>
 
@@ -93,7 +93,7 @@
                 <div class="md:flex md:items-center">
                     <div class="md:w-1/2 md:pr-8 md:text-right">
                         <h3 class="text-xl font-semibold text-yellow-400">Fotografie Comercială și de Studio</h3>
-                        <p class="text-sm text-gray-400 md:text-base">2015 - Prezent</p>
+                        <p class="text-sm text-gray-400 md:text-base">2015 - 2024</p>
                     </div>
                     <div class="absolute top-0 left-0 flex items-center justify-center w-8 h-8 bg-yellow-400 rounded-full md:left-1/2 md:-ml-4 md:top-1/2 md:-mt-4">
                         <span class="text-xs font-bold text-black">2015</span>
@@ -108,7 +108,7 @@
                 <div class="md:flex md:items-center">
                     <div class="md:w-1/2 md:pr-8 md:text-right">
                         <h3 class="text-xl font-semibold text-yellow-400">Evenimente Private</h3>
-                        <p class="text-sm text-gray-400 md:text-base">2015 - Prezent</p>
+                        <p class="text-sm text-gray-400 md:text-base">2015 - 2024</p>
                     </div>
                     <div class="absolute top-0 left-0 flex items-center justify-center w-8 h-8 bg-yellow-400 rounded-full md:left-1/2 md:-ml-4 md:top-1/2 md:-mt-4">
                         <span class="text-xs font-bold text-black">2015</span>
