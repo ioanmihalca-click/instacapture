@@ -42,6 +42,7 @@
     <!-- Local Business Schema Markup -->
 
     <script type="application/ld+json">
+@verbatim
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -144,6 +145,7 @@
     }
   ]
 }
+@endverbatim
 </script>
 
 
@@ -196,7 +198,7 @@
         <div x-show="!isPortfolioPage"
             class="fixed top-[-10%] md:top-0 left-0 w-2/5 md:w-1/2 h-screen bg-center bg-cover z-0"
             style="background-image: url('/assets/photo-bg-gradient.webp');">
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
+            <div class="absolute inset-0 bg-linear-to-r from-transparent to-black"></div>
         </div>
 
         <x-nav />

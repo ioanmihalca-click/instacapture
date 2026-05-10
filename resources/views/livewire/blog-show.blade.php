@@ -4,7 +4,7 @@
             @if($blog->cover_image)
                 <div class="relative">
                     <img src="{{ asset('storage/' . $blog->cover_image) }}" alt="{{ $blog->title }}" class="object-cover w-full h-auto">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                    <div class="absolute inset-0 bg-linear-to-t from-gray-900 to-transparent"></div>
                 </div>
             @endif
             <div class="p-8">

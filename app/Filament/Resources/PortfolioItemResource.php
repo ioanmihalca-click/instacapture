@@ -2,19 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use App\Models\PortfolioItem;
-use Filament\Resources\Resource;
-use App\Services\CloudinaryService;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PortfolioItemResource\Pages;
-use App\Filament\Resources\PortfolioItemResource\RelationManagers;
+use App\Models\Category;
+use App\Models\PortfolioItem;
+use App\Services\CloudinaryService;
+use Filament\Actions;
+use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class PortfolioItemResource extends Resource
 {
@@ -22,62 +21,64 @@ class PortfolioItemResource extends Resource
 
     protected static ?string $navigationLabel = 'Portofoliu Items';
 
-    protected static ?string $navigationIcon = 'heroicon-o-camera';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-camera';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-        ->schema([
-            Forms\Components\Select::make('category_id')
-                ->label('Category')
-                ->options(\App\Models\Category::all()->pluck('name', 'id'))
-                ->required(),
-            Forms\Components\FileUpload::make('image')
-                ->image()
-                ->maxSize(10024)
-                ->directory('portfolio')
-                ->afterStateUpdated(function ($state, callable $set) {
-                    if ($state) {
-                        $cloudinaryService = app(CloudinaryService::class);
-                        $result = $cloudinaryService->uploadImage($state);
-                        $set('image_public_id', $result['public_id']);
-                    }
-                }),
-            Forms\Components\Hidden::make('image_public_id'),
-        ]);
-}
+        return $schema
+            ->schema([
+                Forms\Components\Select::make('category_id')
+                    ->label('Category')
+                    ->options(Category::all()->pluck('name', 'id'))
+                    ->required(),
+                FileUpload::make('image')
+                    ->image()
+                    ->maxSize(10024)
+                    ->directory('portfolio')
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        if ($state) {
+                            $cloudinaryService = app(CloudinaryService::class);
+                            $result = $cloudinaryService->uploadImage($state);
+                            $set('image_public_id', $result['public_id']);
+                        }
+                    }),
+                Forms\Components\Hidden::make('image_public_id'),
+            ]);
+    }
+
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            Tables\Columns\TextColumn::make('category.name')->label('Category'),
-            Tables\Columns\ImageColumn::make('image')
-                ->getStateUsing(function (PortfolioItem $record) {
-                    $cloudinaryService = app(CloudinaryService::class);
-                    return $cloudinaryService->getImageUrl($record->image_public_id, ['width' => 100, 'height' => 100, 'crop' => 'fill']);
-                }),
-        ])
-        ->filters([
-            //
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make()
-                ->before(function (PortfolioItem $record) {
-                    $cloudinaryService = app(CloudinaryService::class);
-                    $cloudinaryService->deleteImage($record->image_public_id);
-                }),
-        ])
-        ->bulkActions([
-            Tables\Actions\DeleteBulkAction::make()
-                ->before(function (Collection $records) {
-                    $cloudinaryService = app(CloudinaryService::class);
-                    foreach ($records as $record) {
+            ->columns([
+                Tables\Columns\TextColumn::make('category.name')->label('Category'),
+                Tables\Columns\ImageColumn::make('image')
+                    ->getStateUsing(function (PortfolioItem $record) {
+                        $cloudinaryService = app(CloudinaryService::class);
+
+                        return $cloudinaryService->getImageUrl($record->image_public_id, ['width' => 100, 'height' => 100, 'crop' => 'fill']);
+                    }),
+            ])
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make()
+                    ->before(function (PortfolioItem $record) {
+                        $cloudinaryService = app(CloudinaryService::class);
                         $cloudinaryService->deleteImage($record->image_public_id);
-                    }
-                }),
-        ]);
-}
+                    }),
+            ])
+            ->toolbarActions([
+                Actions\DeleteBulkAction::make()
+                    ->before(function (Collection $records) {
+                        $cloudinaryService = app(CloudinaryService::class);
+                        foreach ($records as $record) {
+                            $cloudinaryService->deleteImage($record->image_public_id);
+                        }
+                    }),
+            ]);
+    }
 
     public static function getRelations(): array
     {

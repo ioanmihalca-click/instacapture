@@ -17,7 +17,7 @@
                 <div class="mb-3 md:mb-4">
                     <label for="name" class="block mb-1 text-sm font-medium text-gray-300 md:mb-2">Nume</label>
                     <input type="text" id="name" wire:model="name"
-                        class="w-full px-3 py-2 text-sm text-white bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 md:text-base"
+                        class="w-full px-3 py-2 text-sm text-white bg-gray-700 border border-gray-600 rounded-md focus:outline-hidden focus:ring-2 focus:ring-yellow-400 md:text-base"
                         required>
                     @error('name')
                         <span class="text-sm text-red-500">{{ $message }}</span>
@@ -26,7 +26,7 @@
                 <div class="mb-3 md:mb-4">
                     <label for="email" class="block mb-1 text-sm font-medium text-gray-300 md:mb-2">Email</label>
                     <input type="email" id="email" wire:model="email"
-                        class="w-full px-3 py-2 text-sm text-white bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 md:text-base"
+                        class="w-full px-3 py-2 text-sm text-white bg-gray-700 border border-gray-600 rounded-md focus:outline-hidden focus:ring-2 focus:ring-yellow-400 md:text-base"
                         required>
                     @error('email')
                         <span class="text-sm text-red-500">{{ $message }}</span>
@@ -35,14 +35,14 @@
                 <div class="mb-3 md:mb-4">
                     <label for="message" class="block mb-1 text-sm font-medium text-gray-300 md:mb-2">Mesaj</label>
                     <textarea id="message" wire:model="message" rows="4"
-                        class="w-full px-3 py-2 text-sm text-white bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 md:text-base"
+                        class="w-full px-3 py-2 text-sm text-white bg-gray-700 border border-gray-600 rounded-md focus:outline-hidden focus:ring-2 focus:ring-yellow-400 md:text-base"
                         required></textarea>
                     @error('message')
                         <span class="text-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <button type="submit"
-                    class="w-full px-4 py-2 text-sm font-semibold text-black transition-colors duration-300 bg-yellow-400 rounded-md hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 md:text-base"
+                    class="w-full px-4 py-2 text-sm font-semibold text-black transition-colors duration-300 bg-yellow-400 rounded-md hover:bg-yellow-300 focus:outline-hidden focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 md:text-base"
                     wire:loading.attr="disabled">
                     <span wire:loading.remove>Trimite Mesajul</span>
                     <span wire:loading>Se trimite...</span>

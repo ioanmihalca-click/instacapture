@@ -89,7 +89,7 @@
             { icon: '📦', text: 'Fotografie de produs pentru e-commerce și cataloage locale' },
             { icon: '🎂', text: 'Fotografie pentru zile de naștere ale copiilor, captând bucuria în parcurile și locațiile distractive din Cluj si nu numai' }
         ]">
-            <li class="p-4 transition-all duration-500 ease-out transform rounded-lg shadow-md opacity-0 bg-gradient-to-r from-gray-800 to-gray-900 hover:shadow-lg hover:from-gray-700 hover:to-gray-800 hover:-translate-y-1"
+            <li class="p-4 transition-all duration-500 ease-out transform rounded-lg shadow-md opacity-0 bg-linear-to-r from-gray-800 to-gray-900 hover:shadow-lg hover:from-gray-700 hover:to-gray-800 hover:-translate-y-1"
                 :class="{ 'opacity-100': showContent }"
                 :style="'transition-delay: ' + (1000 + (7 + index) * 300) + 'ms'">
                 <div class="flex items-center space-x-4">
