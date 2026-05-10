@@ -2,7 +2,7 @@
 
 
         <!-- Overlay navigation -->
-        <div class="absolute top-0 left-0 right-0 z-30 p-6 bg-gradient-to-t from-transparent to-black" :class="{ 'w-full': isPortfolioPage }">
+        <div class="absolute top-0 left-0 right-0 z-30 p-6 bg-linear-to-t from-transparent to-black" :class="{ 'w-full': isPortfolioPage }">
             <div class="container flex items-center justify-between mx-auto">
 
                 <!-- Logo Section -->
@@ -23,7 +23,7 @@
                     <!-- Mobile menu button -->
                     <div class="md:hidden">
                         <button @click="isMenuOpen = !isMenuOpen" aria-label="Deschide meniul"
-                            class="text-white hover:text-gray-300 focus:outline-none">
+                            class="text-white hover:text-gray-300 focus:outline-hidden">
                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16M4 18h16"></path>
@@ -95,7 +95,7 @@
 
             <!-- Close button -->
             <button @click="isMenuOpen = false"
-                class="absolute text-white top-4 right-4 hover:text-gray-300 focus:outline-none">
+                class="absolute text-white top-4 right-4 hover:text-gray-300 focus:outline-hidden">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                     </path>

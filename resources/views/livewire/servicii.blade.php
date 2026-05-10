@@ -47,7 +47,7 @@
                     <p class="text-gray-300 transition-colors duration-300 group-hover:text-white" x-text="service.description"></p>
                     <a href="/contact" class="inline-block mt-4 text-yellow-400 transition-colors duration-300 group-hover:text-white hover:underline">Află mai multe</a>
                 </div>
-                <div class="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-br from-yellow-400 to-yellow-600 group-hover:opacity-20"></div>
+                <div class="absolute inset-0 transition-opacity duration-300 opacity-0 bg-linear-to-br from-yellow-400 to-yellow-600 group-hover:opacity-20"></div>
             </div>
         </template>
     </div>
