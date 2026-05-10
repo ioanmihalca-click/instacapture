@@ -38,11 +38,11 @@ return [
     |
     */
 
-    'layout' => 'components.layouts.app',
+    'component_layout' => 'components.layouts.app',
 
     /*
     |---------------------------------------------------------------------------
-    | Lazy Loading Placeholder
+    | Component Placeholder
     |---------------------------------------------------------------------------
     | Livewire allows you to lazy load components that would otherwise slow down
     | the initial page load. Every component can have a custom placeholder or
@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'lazy_placeholder' => null,
+    'component_placeholder' => null,
 
     /*
     |---------------------------------------------------------------------------

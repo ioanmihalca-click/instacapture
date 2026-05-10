@@ -2,18 +2,15 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
+use App\Filament\Resources\CategoryResource\Pages;
 use App\Models\Category;
-use Filament\Forms\Form;
+use Filament\Actions;
+use Filament\Forms;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
-use Filament\Resources\Resource;
-use Livewire\Component as Livewire;
-use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\CategoryResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\CategoryResource\RelationManagers;
 
 class CategoryResource extends Resource
 {
@@ -21,20 +18,20 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationLabel = 'Categorii';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-        ->schema([
-            Forms\Components\TextInput::make('name')
-                ->required()
-                
-                ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
-            Forms\Components\TextInput::make('slug')
-                ->required()
-                ->unique(Category::class, 'slug', fn ($record) => $record),
-        ]);
+        return $schema
+            ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->required()
+
+                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->unique(Category::class, 'slug', fn ($record) => $record),
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -52,16 +49,16 @@ class CategoryResource extends Resource
                     })
                     ->sortable(),
             ])
-        ->filters([
-            //
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\DeleteBulkAction::make(),
-        ]);
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
+            ])
+            ->toolbarActions([
+                Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getRelations(): array
@@ -78,15 +75,5 @@ class CategoryResource extends Resource
             'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
-    }
-
-    public static function afterCreate(Category $record, array $data): void
-    {
-        Livewire::dispatchBrowserEvent('categoryAdded');
-    }
-
-    public static function afterDelete(Category $record): void
-    {
-        Livewire::dispatchBrowserEvent('categoryDeleted');
     }
 }
